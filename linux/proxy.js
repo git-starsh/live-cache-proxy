@@ -765,6 +765,25 @@ function logProxyRoute(urlStr, mode) {
   }
 }
 
+/**
+ * 日志后缀：这次连接是直连还是走代理，走代理时带上规则命中的节点。
+ * 返回空串或形如 “ · 直连”“ · 走代理：规则组 订阅 xx（🇹🇼台湾Hinet）”。
+ */
+function routeLogTag(urlStr) {
+  const u = String(urlStr || '').trim();
+  if (!u) return '';
+  const rt = loadProxyRuntime();
+  if (!rt || !rt.enabled || !rt.url) return ' · 直连';
+  if (!proxyFor(u)) return ' · 直连';
+  let host = '';
+  try {
+    host = new URL(u).hostname.toLowerCase();
+  } catch (_) {
+    return ' · 走代理';
+  }
+  return ' · 走代理：' + proxyRouteTarget(rt, host);
+}
+
 /** 通过代理建立到 host:port 的 TCP 连接 */
 function connectViaProxy(proxy, host, port, timeout, cb) {
   let done = false;
@@ -1097,7 +1116,7 @@ async function getWithRetry(urlStr, opts = {}, retries = config.retries) {
         }
       }
       if (config.debug) {
-        log(`↗ ${r.status} ${Date.now() - t0}ms ${urlStr.slice(0, 110)}`);
+        log(`↗ ${r.status} ${Date.now() - t0}ms ${urlStr.slice(0, 110)}${routeLogTag(urlStr)}`);
       }
       if (r.status >= 200 && r.status < 300) {
         return r;
@@ -1107,7 +1126,7 @@ async function getWithRetry(urlStr, opts = {}, retries = config.retries) {
       if (r.status === 503 || r.status === 403) requestSourceRefresh();
     } catch (e) {
       lastErr = e;
-      if (config.debug) log(`↗ ERR ${Date.now() - t0}ms ${e.message} ${urlStr.slice(0, 90)}`);
+      if (config.debug) log(`↗ ERR ${Date.now() - t0}ms ${e.message} ${urlStr.slice(0, 90)}${routeLogTag(urlStr)}`);
     }
     if (attempt < retries) await sleep(300 * Math.pow(2, attempt));
   }
@@ -1262,9 +1281,9 @@ async function loadSource(force = false) {
           1
         );
         if (r.status === 200) text = r.body.toString('utf8');
-        else log(`源清单 HTTP ${r.status}`);
+        else log(`源清单 HTTP ${r.status}${routeLogTag(config.source)}`);
       } catch (e) {
-        log('源清单拉取失败:', e.message);
+        log(`源清单拉取失败：${e.message}${routeLogTag(config.source)}`);
       }
       // 拉不到就用上一次的缓存副本
       const local = path.join(ROOT, 'tv.m3u');
@@ -1338,7 +1357,7 @@ async function loadSource(force = false) {
         st.ch = ch;
       }
     }
-    log(`已加载源清单：${channels.length} 个频道`);
+    log(`已加载源清单：${channels.length} 个频道${/^https?:/i.test(config.source) ? routeLogTag(config.source) : ''}`);
 
     // 签名换新后，之前判定为演示源的条目要尽快复核（签名过期也会返回演示片）
     setTimeout(() => {
@@ -1546,7 +1565,7 @@ class Stream {
     this.firstSegLogged = false;
     const token = this.runToken;
     fsp.mkdir(this.dir, { recursive: true }).catch(() => {});
-    log(`▶ 开始本地缓存：${this.ch.name} (${this.id})${this.poolTargetSegments() ? ` · 缓冲池 ${Number(config.bufferPoolSeconds) || 0}s` : ''}`);
+    log(`▶ 开始本地缓存：${this.ch.name} (${this.id})${this.poolTargetSegments() ? ` · 缓冲池 ${Number(config.bufferPoolSeconds) || 0}s` : ''}${routeLogTag(this.playlistUrl || this.resolvedUrl || this.ch.url)}`);
     this.loop(token);
   }
 
@@ -2766,13 +2785,13 @@ async function handle(req, res) {
             // 每个频道最多每分钟记一条，避免播放器轮询刷屏
             if (Date.now() - st.lastDirectListLog > 60000) {
               st.lastDirectListLog = Date.now();
-              log(`📡 拉取清单：${st.ch.name} (${st.id})（切片直连）`);
+              log(`📡 拉取清单：${st.ch.name} (${st.id})（切片本地缓存已关）${routeLogTag(st.playlistUrl || st.resolvedUrl || st.ch.url)}`);
             }
           })
           .catch((e) => {
             st.lastError = e.message;
             if (st.errorStreak === 1 || st.errorStreak % 10 === 0) {
-              log(`[${st.ch.name}] 拉取清单失败: ${e.message}`);
+              log(`[${st.ch.name}] 拉取清单失败: ${e.message}${routeLogTag(st.playlistUrl || st.resolvedUrl || st.ch.url)}`);
             }
           });
         // 播放器来要清单不能等太久：最多阻塞 2 秒，刷新继续在后台跑，
@@ -2789,7 +2808,7 @@ async function handle(req, res) {
       if (!st.blocks.length) {
         const p = st.tick().catch((e) => {
           st.lastError = e.message;
-          log(`[${st.ch.name}] 拉流失败: ${e.message}`);
+          log(`[${st.ch.name}] 拉流失败: ${e.message}${routeLogTag(st.playlistUrl || st.resolvedUrl || st.ch.url)}`);
         });
         await Promise.race([p, sleep(12000)]);
         if (!st.blocks.length) {
@@ -2827,7 +2846,7 @@ async function handle(req, res) {
         } catch (e) {
           st.lastError = e.message;
           if (st.errorStreak === 1 || st.errorStreak % 10 === 0) {
-            log(`[${st.ch.name}] 拉取清单失败: ${e.message}`);
+            log(`[${st.ch.name}] 拉取清单失败: ${e.message}${routeLogTag(st.playlistUrl || st.resolvedUrl || st.ch.url)}`);
           }
         }
         meta = st.files.get(name);
@@ -2835,7 +2854,7 @@ async function handle(req, res) {
       if (!meta || !meta.url) return send(res, 404, '切片不存在（切片缓存已关闭）');
       if (Date.now() - st.lastDirectSegLog > 60000) {
         st.lastDirectSegLog = Date.now();
-        log(`📡 直连切片走上游：${st.ch.name} (${st.id})`);
+        log(`📡 切片跳转上游：${st.ch.name} (${st.id})${routeLogTag(meta.url)}`);
       }
       res.writeHead(302, { Location: meta.url, 'Cache-Control': 'no-store' });
       return res.end();
