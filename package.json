@@ -1,0 +1,13 @@
+{
+  "name": "live-cache-proxy",
+  "version": "1.0.0",
+  "private": true,
+  "description": "直播源本地缓冲代理：预取 HLS 切片，解决播放间断",
+  "main": "proxy.js",
+  "scripts": {
+    "start": "node proxy.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

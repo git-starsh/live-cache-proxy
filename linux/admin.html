@@ -1,0 +1,1439 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>直播源代理 · 管理</title>
+<script>
+(function () {
+  try {
+    var t = localStorage.getItem('m3u-theme');
+    if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+})();
+</script>
+<style>
+  :root{
+    --bg:#f3f7fd; --bg-tint:#e8f0ff;
+    --panel:#ffffff; --panel2:#f7f9fe; --line:#e3e9f4;
+    --text:#1b2436; --muted:#6b7a90;
+    --accent:#2f6bff; --accent-soft:#eaf0ff;
+    --accent2:#10b981; --green-soft:#e7f9f1;
+    --warn:#f59e0b; --warn-soft:#fff7e6;
+    --err:#ef4444; --err-soft:#fef0ef;
+    --radius:16px;
+    --shadow:0 1px 2px rgba(23,43,77,.05),0 10px 28px rgba(23,43,77,.07);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;color:var(--text);
+    font:14px/1.6 system-ui,-apple-system,"Segoe UI","Noto Sans SC",sans-serif;
+    background:
+      radial-gradient(900px 420px at 8% -10%,#dfeaff 0%,rgba(223,234,255,0) 62%),
+      radial-gradient(760px 420px at 100% 0%,#e3f9f0 0%,rgba(227,249,240,0) 55%),
+      var(--bg);
+    min-height:100vh;
+  }
+  body.help-lock{overflow:hidden}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  code{background:var(--accent-soft);border:1px solid #dbe5ff;color:#23408f;border-radius:6px;padding:1px 7px;font-size:12px;word-break:break-all}
+  header.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;padding:10px 18px;background:rgba(255,255,255,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);box-shadow:0 1px 0 rgba(23,43,77,.02)}
+  .brand{font-size:16px;font-weight:800;letter-spacing:.2px;white-space:nowrap;background:linear-gradient(120deg,#2f6bff,#0ea5a4);-webkit-background-clip:text;background-clip:text;color:transparent;flex:none}
+  .top-menu{flex:1;display:flex;align-items:center;gap:10px;min-width:0}
+  .top-bar{order:2;display:flex;align-items:center;gap:10px;flex:none;margin-left:auto}
+  .toggler{display:none;align-items:center;justify-content:center;width:38px;height:38px;flex:none;font-size:20px;line-height:1;color:var(--text);background:var(--panel2);border:1px solid var(--line);border-radius:10px;cursor:pointer}
+  .toggler:hover{background:#eef3fb}
+  .tabs{order:1;display:flex;gap:4px;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:4px;overflow-x:auto;scrollbar-width:none;width:100%;max-width:560px;flex:1 1 auto;min-width:0}
+  .tabs::-webkit-scrollbar{display:none}
+  .tabs button{background:transparent;color:var(--muted);border:1px solid transparent;border-radius:8px;padding:7px 16px;font-size:13.5px;font-weight:600;cursor:pointer;white-space:nowrap;transition:.16s;flex:1}
+  .tabs button:hover{color:var(--text);background:#eef3fb}
+  .tabs button.active{color:#fff;background:linear-gradient(120deg,#3a78ff,#2f6bff);box-shadow:0 4px 12px rgba(47,107,255,.28)}
+  .pill{font-size:12px;font-weight:600;padding:5px 12px;border-radius:999px;border:1px solid var(--line);color:var(--muted);white-space:nowrap;background:#fff;min-width:0;overflow:hidden;text-overflow:ellipsis}
+  .pill.ok{color:#067647;border-color:#b7ebd5;background:var(--green-soft)}
+  .pill.bad{color:#b42318;border-color:#f7c9c5;background:var(--err-soft)}
+  main{max-width:1180px;margin:26px auto 96px;padding:0 18px}
+  h2{font-size:16px;margin:28px 0 14px;display:flex;align-items:center;gap:9px}
+  h2::before{content:"";width:4px;height:16px;border-radius:99px;background:linear-gradient(180deg,#3a78ff,#0ea5a4)}
+  h2:first-child{margin-top:0}
+  .muted{color:var(--muted)}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:14px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:17px 18px;box-shadow:var(--shadow);transition:transform .18s ease,box-shadow .18s ease}
+  .card:hover{transform:translateY(-2px);box-shadow:0 2px 4px rgba(23,43,77,.05),0 16px 34px rgba(23,43,77,.10)}
+  .card .k{color:var(--muted);font-size:12px;font-weight:600;letter-spacing:.3px;margin-bottom:7px}
+  .card .v{font-size:19px;font-weight:700;word-break:break-all;letter-spacing:.1px}
+  .card .sub{color:var(--muted);font-size:12px;margin-top:7px;word-break:break-all}
+  .diskbar{height:9px;border-radius:99px;background:#eef2f9;margin-top:10px;overflow:hidden}
+  .diskbar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#0ea5a4,#10b981);transition:width .45s ease}
+  .diskbar i.warn{background:linear-gradient(90deg,#fbbf24,#f59e0b)}
+  .diskbar i.bad{background:linear-gradient(90deg,#f87171,#ef4444)}
+  .actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:14px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow)}
+  button.btn{background:#fff;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:9px 15px;cursor:pointer;font-size:13px;font-weight:600;transition:.16s;box-shadow:0 1px 2px rgba(23,43,77,.04)}
+  button.btn:hover{background:#f5f8fe;border-color:#cfdbf1;transform:translateY(-1px)}
+  button.btn:active{transform:none}
+  button.btn.primary{background:linear-gradient(120deg,#3a78ff,#2f6bff);border-color:#2f6bff;color:#fff;box-shadow:0 6px 16px rgba(47,107,255,.26)}
+  button.btn.primary:hover{filter:brightness(1.06)}
+  button.btn.green{background:linear-gradient(120deg,#12b981,#0ea472);border-color:#0ea472;color:#fff;box-shadow:0 5px 14px rgba(16,185,129,.22)}
+  button.btn.blue{background:linear-gradient(120deg,#4b8bff,#2f6bff);border-color:#2f6bff;color:#fff;box-shadow:0 5px 14px rgba(47,107,255,.22)}
+  button.btn.violet{background:linear-gradient(120deg,#a78bfa,#7c5cf0);border-color:#7c5cf0;color:#fff;box-shadow:0 5px 14px rgba(124,92,240,.22)}
+  button.btn.amber{background:linear-gradient(120deg,#fbbf24,#f59e0b);border-color:#f59e0b;color:#fff;box-shadow:0 5px 14px rgba(245,158,11,.24)}
+  button.btn.coral{background:linear-gradient(120deg,#f87171,#ef4444);border-color:#ef4444;color:#fff;box-shadow:0 5px 14px rgba(239,68,68,.24)}
+  button.btn.green:hover,button.btn.blue:hover,button.btn.violet:hover,button.btn.amber:hover,button.btn.coral:hover{filter:brightness(1.06)}
+  button.btn.danger{background:#fff;border-color:#f5c6c2;color:#c0392b}
+  button.btn.danger:hover{background:var(--err-soft)}
+  button.btn.tiny{padding:5px 12px;font-size:12px;border-radius:999px}
+  button.btn:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+  .group{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:16px;overflow:hidden;box-shadow:var(--shadow)}
+  .group>summary{cursor:pointer;padding:15px 20px;font-weight:700;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;background:linear-gradient(180deg,#fff,#fbfcff)}
+  .group>summary:hover{background:#f8faff}
+  .group>summary::-webkit-details-marker{display:none}
+  .group>summary::after{content:"▾";color:var(--muted);transition:.2s}
+  .group[open]>summary::after{transform:rotate(180deg)}
+  .group>summary .gact{margin-left:auto}
+  .group .desc{padding:0 20px;margin:2px 0 14px;color:var(--muted);font-size:12px;line-height:1.6}
+  .fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px 22px;padding:4px 20px 20px;border-top:1px dashed var(--line);margin-top:0;padding-top:16px}
+  .field label{display:block;font-size:13px;margin-bottom:6px;font-weight:650;color:var(--text)}
+  .field .hint{color:var(--muted);font-size:12px;margin-top:6px;line-height:1.55}
+  .field.wide{grid-column:1/-1}
+  .field.disabled{opacity:.5}
+  .field.disabled .switch span{cursor:not-allowed}
+  .input{display:flex;align-items:center;gap:8px}
+  input[type=text],input[type=password],input[type=number],select,textarea{
+    width:100%;background:#fbfcff;border:1px solid #d8e1f0;color:var(--text);
+    border-radius:10px;padding:9px 12px;font-size:13px;outline:none;transition:.16s
+  }
+  textarea{resize:vertical;min-height:64px;line-height:1.5;font-family:inherit}
+  input[type=text]:hover,input[type=password]:hover,input[type=number]:hover,select:hover,textarea:hover{border-color:#c2cfe6}
+  input:focus,select:focus,textarea:focus{border-color:var(--accent);background:#fff;box-shadow:0 0 0 4px rgba(47,107,255,.12)}
+  .input .unit{color:var(--muted);font-size:12px;white-space:nowrap}
+  .switch{position:relative;display:inline-block;width:46px;height:26px;flex:none;vertical-align:middle}
+  .switch input{opacity:0;width:0;height:0}
+  .switch span{position:absolute;inset:0;background:#dbe3f0;border-radius:999px;cursor:pointer;transition:.2s}
+  .switch span::before{content:"";position:absolute;width:20px;height:20px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s;box-shadow:0 1px 3px rgba(23,43,77,.28)}
+  .switch input:checked+span{background:linear-gradient(120deg,#12b981,#0ea472)}
+  .switch input:checked+span::before{transform:translateX(20px)}
+  .savebar{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;gap:12px;align-items:center;padding:12px 24px;background:rgba(255,255,255,.92);border-top:1px solid var(--line);backdrop-filter:blur(14px);box-shadow:0 -6px 24px rgba(23,43,77,.06)}
+  .savebar .spacer{flex:1}
+  table{width:100%;border-collapse:separate;border-spacing:0;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+  th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);font-size:13px;vertical-align:middle}
+  th{background:var(--panel2);color:var(--muted);font-weight:700;font-size:12px;letter-spacing:.3px}
+  tr:last-child td{border-bottom:none}
+  tbody tr:hover{background:#f9fbff}
+  tr.current{background:linear-gradient(90deg,#eef4ff,#f8fbff)}
+  tr.current:hover{background:#eaf2ff}
+  .badge{display:inline-block;padding:2px 9px;border-radius:999px;font-size:12px;font-weight:600;border:1px solid var(--line);background:var(--panel2);color:var(--muted)}
+  .badge.ok{color:#067647;background:var(--green-soft);border-color:#b7ebd5}
+  .badge.bad{color:#b42318;background:var(--err-soft);border-color:#f7c9c5}
+  .badge.warn{color:#a16207;background:var(--warn-soft);border-color:#fde3ad}
+  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;background:#c3ccdb}
+  .dot.on{background:var(--accent2);box-shadow:0 0 0 3px rgba(16,185,129,.18)}
+  .dot.off{background:#c3ccdb}
+  .scroll{overflow:auto;max-height:calc(100vh - 260px);border-radius:var(--radius)}
+  #toast{position:fixed;right:22px;bottom:82px;z-index:60;display:flex;flex-direction:column;gap:8px}
+  .toast{background:#fff;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:11px;padding:12px 16px;max-width:420px;box-shadow:0 14px 34px rgba(23,43,77,.16);animation:in .18s ease;font-size:13px}
+  .toast.err{border-left-color:var(--err);background:#fffafa}
+  .toast.ok{border-left-color:var(--accent2);background:#fafffc}
+  @keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .inline{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  td.inline{flex-wrap:nowrap;white-space:nowrap}
+  td.inline .btn{padding:6px 11px;font-size:12px}
+  .logview{background:#fbfdff;border:1px solid var(--line);border-radius:var(--radius);padding:10px 0;height:calc(100vh - 250px);overflow:auto;font:12px/1.68 ui-monospace,SFMono-Regular,Consolas,"Noto Sans Mono CJK SC",monospace;box-shadow:var(--shadow)}
+  .logline{padding:2px 16px;white-space:pre-wrap;word-break:break-all;border-left:3px solid transparent;color:#3b4a61}
+  .logline:hover{background:#f2f6fd}
+  .logline .lt{color:#9aa8bd;margin-right:10px;user-select:none}
+  .logline.err{color:#b42318;border-left-color:#f97066;background:#fff5f4}
+  .logline.warn{color:#a16207;border-left-color:#fbbf24;background:#fffaf0}
+  .logline.ok{color:#067647}
+  .logline.sys{color:#77859a}
+  .modal{position:fixed;inset:0;z-index:80;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(23,37,63,.35);backdrop-filter:blur(3px)}
+  .modal[hidden]{display:none}
+  .modal-box{width:min(440px,100%);background:#fff;border-radius:18px;padding:24px;box-shadow:0 24px 60px rgba(23,43,77,.28);animation:in .18s ease}
+  .modal-box h3{margin:0 0 10px;font-size:17px}
+  .modal-box p{margin:0;color:var(--muted);font-size:13.5px;line-height:1.7}
+  .modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:22px}
+  .field.flash{background:var(--accent-soft);border-radius:10px}
+  .help-btn{margin-left:auto;display:inline-flex;align-items:center;gap:5px;background:var(--accent-soft);color:var(--accent);border:1px solid #d5e2ff;border-radius:999px;padding:4px 12px;font-size:12px;font-weight:650;cursor:pointer;transition:.16s}
+  .help-btn:hover{filter:brightness(.97);transform:translateY(-1px)}
+  .help-modal{position:fixed;inset:0;z-index:120;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(15,23,42,.45);backdrop-filter:blur(4px);animation:fadeIn .16s ease}
+  .help-modal[hidden]{display:none}
+  .help-box{display:flex;flex-direction:column;width:min(920px,100%);max-height:min(88vh,1000px);background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:0 24px 70px rgba(15,23,42,.35);overflow:hidden;animation:in .2s ease}
+  .help-head{display:flex;align-items:center;gap:9px;margin:0;padding:15px 22px;background:linear-gradient(120deg,var(--accent-soft),var(--panel));border-bottom:1px solid var(--line);flex:none}
+  .help-badge{font-size:11px;font-weight:700;color:#fff;background:var(--accent);border-radius:999px;padding:2px 9px;flex:none}
+  .help-head b{font-size:15px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .help-close{margin-left:auto;background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:4px 14px;font-size:12px;cursor:pointer;flex:none}
+  .help-close:hover{color:var(--text);background:var(--panel2)}
+  .help-body{color:var(--muted);font-size:13px;line-height:1.8;padding:18px 22px 22px;overflow:auto;flex:1;min-height:0}
+  .help-body p{margin:0 0 6px}
+  .help-body b{color:var(--text)}
+  .help-sec{margin-top:16px;padding-top:16px;border-top:1px dashed var(--line)}
+  .help-sec:first-child{margin-top:0;padding-top:0;border-top:0}
+  .help-sec h4{display:flex;align-items:center;gap:8px;margin:0 0 8px;font-size:14px;color:var(--text);font-weight:750}
+  .help-sec h4::before{content:'';width:4px;height:14px;border-radius:2px;background:var(--accent);flex:none}
+  .help-list{margin:0;padding-left:18px}
+  .help-list li{margin:5px 0}
+  .help-list li::marker{color:var(--accent)}
+  .help-kv{display:grid;grid-template-columns:112px minmax(0,1fr);gap:6px 14px;margin:0}
+  .help-kv dt{color:var(--text);font-weight:650}
+  .help-kv dd{margin:0}
+  .help-tip{margin-top:9px;padding:9px 13px;border-radius:10px;background:var(--panel2);border-left:3px solid var(--warn);font-size:12.5px;line-height:1.7}
+  .help-tip.ok{border-left-color:var(--accent2)}
+  .help-tip b{color:var(--text)}
+  .help-body code{font-size:12px;padding:1px 5px}
+  .help-steps{margin:0;padding-left:20px}
+  .help-steps li{margin:6px 0}
+  .help-steps li::marker{color:var(--accent);font-weight:700}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  .playing-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+  .playing-item{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent2);border-radius:12px;padding:13px 16px;box-shadow:var(--shadow)}
+  .playing-item .pi-name{font-weight:750;font-size:14.5px;display:flex;align-items:center;gap:8px;word-break:break-all}
+  .playing-item .pi-meta{color:var(--muted);font-size:12px;margin-top:5px;line-height:1.6}
+  .playing-empty{background:var(--panel);border:1px dashed var(--line);border-radius:12px;padding:16px;color:var(--muted);font-size:13px}
+  .theme-toggle{display:inline-flex;align-items:center;gap:6px;flex:none;background:var(--panel2);color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 13px;font-size:12.5px;font-weight:600;cursor:pointer;white-space:nowrap;transition:.16s}
+  .theme-toggle:hover{color:var(--text);background:#eef3fb}
+
+  /* ---------- 节点页 ---------- */
+  .node-hero{display:flex;gap:20px;justify-content:space-between;align-items:center;flex-wrap:wrap;background:linear-gradient(120deg,var(--panel),#f7faff);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow);margin-bottom:14px}
+  .hero-left{flex:1;min-width:220px}
+  .hero-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+  .hero-node{font-size:21px;font-weight:800;letter-spacing:.2px;word-break:break-all;line-height:1.35}
+  .hero-sub{color:var(--muted);font-size:12.5px;margin-top:7px;word-break:break-all}
+  .hero-switch{display:flex;align-items:center;gap:11px;background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:12px 16px;white-space:nowrap}
+  .hero-switch .lbl{font-size:13px;font-weight:700}
+  .hero-switch .hint{display:block;color:var(--muted);font-size:11.5px;font-weight:400;margin-top:2px}
+  .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:14px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:13px 16px;box-shadow:var(--shadow)}
+  .stat .k{color:var(--muted);font-size:11.5px;font-weight:600;letter-spacing:.3px}
+  .stat .v{font-size:18px;font-weight:750;margin-top:4px;word-break:break-all}
+  .stat .s{color:var(--muted);font-size:11.5px;margin-top:3px;word-break:break-all}
+  .node-toolbar{display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+  .node-toolbar .grow{flex:1;min-width:240px;flex-wrap:nowrap}
+  .node-toolbar input[type=text]{max-width:320px;flex:1 1 200px;width:auto;min-width:0}
+  .node-toolbar select{flex:none}
+  .node-name{display:flex;align-items:center;gap:9px;min-width:0}
+  .node-idx{color:var(--muted);font-size:11px;min-width:24px;text-align:right;font-variant-numeric:tabular-nums}
+  .delay{display:flex;align-items:center;gap:10px}
+  .delay .val{font-variant-numeric:tabular-nums;font-weight:650;min-width:66px}
+  .delay .bar{height:5px;width:76px;border-radius:99px;background:#eef2f9;overflow:hidden}
+  .delay .bar i{display:block;height:100%;border-radius:99px;background:var(--accent2)}
+  .delay .bar i.warn{background:var(--warn)}
+  .delay .bar i.bad{background:var(--err)}
+  .delay .bar i.idle{background:#cfd8e6;width:100%!important}
+  .node-settings{margin-top:18px}
+  .node-settings .group{margin-bottom:0}
+  .quick-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+  .pill-mini{font-size:11px;padding:1px 8px;border-radius:999px;border:1px solid var(--line);background:var(--panel2);color:var(--muted)}
+
+  /* ---------- 夜间模式 ---------- */
+  html[data-theme="dark"]{
+    color-scheme:dark;
+    --bg:#0d1017; --bg-tint:#131a25;
+    --panel:#171b23; --panel2:#1c212b; --line:#2a3140;
+    --text:#e7eaf1; --muted:#8d97a9;
+    --accent:#5b8cff; --accent-soft:#1b2740;
+    --accent2:#22c48e; --green-soft:#123128;
+    --warn:#f0b429; --warn-soft:#3a2e12;
+    --err:#ef5350; --err-soft:#331717;
+    --shadow:0 1px 2px rgba(0,0,0,.35),0 12px 30px rgba(0,0,0,.45);
+  }
+  html[data-theme="dark"] body{background:radial-gradient(900px 420px at 8% -10%,#1b2942 0%,rgba(27,41,66,0) 62%),radial-gradient(760px 420px at 100% 0%,#10322a 0%,rgba(16,50,42,0) 55%),var(--bg)}
+  html[data-theme="dark"] header.top{background:rgba(15,18,25,.88)}
+  html[data-theme="dark"] .tabs{background:#151a23}
+  html[data-theme="dark"] .tabs button:hover{background:#1e2531;color:var(--text)}
+  html[data-theme="dark"] .pill{background:#161b24}
+  html[data-theme="dark"] .pill.ok{color:#8ef0c8;border-color:#1f6b52}
+  html[data-theme="dark"] .pill.bad{color:#ffb4b4;border-color:#6e2c2c}
+  html[data-theme="dark"] code{background:#1b2740;border-color:#2b3a5c;color:#a9c3ff}
+  html[data-theme="dark"] .card:hover{box-shadow:0 2px 4px rgba(0,0,0,.4),0 16px 34px rgba(0,0,0,.45)}
+  html[data-theme="dark"] .diskbar{background:#232a36}
+  html[data-theme="dark"] button.btn{background:#1d2330;border-color:#2e3647;box-shadow:none}
+  html[data-theme="dark"] button.btn:hover{background:#242c3c;border-color:#3b4559}
+  html[data-theme="dark"] button.btn.danger{background:#241a1b;border-color:#5c2a2b;color:#ffb4b4}
+  html[data-theme="dark"] button.btn.danger:hover{background:#331717}
+  html[data-theme="dark"] .group>summary{background:linear-gradient(180deg,#1a1f29,#171b23)}
+  html[data-theme="dark"] .group>summary:hover{background:#1e2531}
+  html[data-theme="dark"] input[type=text],html[data-theme="dark"] input[type=password],html[data-theme="dark"] input[type=number],html[data-theme="dark"] select,html[data-theme="dark"] textarea{background:#12161e;border-color:#2e3647;color:var(--text)}
+  html[data-theme="dark"] input[type=text]:hover,html[data-theme="dark"] input[type=password]:hover,html[data-theme="dark"] input[type=number]:hover,html[data-theme="dark"] select:hover,html[data-theme="dark"] textarea:hover{border-color:#3b4559}
+  html[data-theme="dark"] input:focus,html[data-theme="dark"] select:focus,html[data-theme="dark"] textarea:focus{background:#151a24;box-shadow:0 0 0 4px rgba(91,140,255,.16)}
+  html[data-theme="dark"] .switch span{background:#39414f}
+  html[data-theme="dark"] .switch input:checked+span{background:linear-gradient(120deg,#12b981,#0ea472)}
+  html[data-theme="dark"] .savebar{background:rgba(15,18,25,.92)}
+  html[data-theme="dark"] th{background:#1b202a}
+  html[data-theme="dark"] tbody tr:hover{background:#1b212c}
+  html[data-theme="dark"] tr.current{background:linear-gradient(90deg,#1a2740,#171d28)}
+  html[data-theme="dark"] tr.current:hover{background:#1f2b45}
+  html[data-theme="dark"] .badge.ok{color:#8ef0c8;border-color:#1f6b52}
+  html[data-theme="dark"] .badge.bad{color:#ffb4b4;border-color:#6e2c2c}
+  html[data-theme="dark"] .badge.warn{color:#ffe1a1;border-color:#6b541f}
+  html[data-theme="dark"] .dot,html[data-theme="dark"] .dot.off{background:#4a5464}
+  html[data-theme="dark"] .logview{background:#0c1016}
+  html[data-theme="dark"] .logline{color:#c2cbdb}
+  html[data-theme="dark"] .logline:hover{background:#141a23}
+  html[data-theme="dark"] .logline.err{color:#ffb4b4;background:#2a1717}
+  html[data-theme="dark"] .logline.warn{color:#ffe1a1;background:#2b2413}
+  html[data-theme="dark"] .logline.ok{color:#9ef0cd}
+  html[data-theme="dark"] .logline.sys{color:#8b93a7}
+  html[data-theme="dark"] .toast{background:#1d2330}
+  html[data-theme="dark"] .toast.err{background:#241a1b}
+  html[data-theme="dark"] .toast.ok{background:#132219}
+  html[data-theme="dark"] .modal{background:rgba(5,8,14,.55)}
+  html[data-theme="dark"] .modal-box{background:#171b23}
+  html[data-theme="dark"] .theme-toggle:hover{background:#232b39;color:var(--text)}
+  html[data-theme="dark"] .toggler{background:#1c212b;border-color:#2e3647}
+  html[data-theme="dark"] .toggler:hover{background:#242c3c}
+  html[data-theme="dark"] .tabs button:hover{background:#242c3c}
+  html[data-theme="dark"] .node-hero{background:linear-gradient(120deg,#171b23,#1a2130)}
+  html[data-theme="dark"] .delay .bar{background:#252c39}
+  html[data-theme="dark"] .delay .bar i.idle{background:#3a4352}
+  @media (max-width:1024px){
+    main{padding:0 14px;margin-top:22px}
+    .cards{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+    .fields{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  }
+  @media (max-width:820px){
+    header.top{flex-wrap:wrap;gap:8px 10px;padding:10px 12px}
+    .brand{font-size:15px}
+    .top-menu{order:3;flex:0 0 100%;flex-direction:column;gap:0;width:100%;align-items:stretch}
+    .top-bar{order:0;width:100%}
+    .toggler{display:inline-flex}
+    .top-bar .pill{margin-left:auto;max-width:calc(100% - 48px)}
+    #mainTabs{display:none;flex-direction:column;align-items:stretch;gap:3px;border-radius:12px;padding:5px}
+    #mainTabs.open{display:flex}
+    #mainTabs button{flex:none;text-align:left;padding:10px 14px}
+    .theme-toggle{margin-left:auto}
+    main{margin-top:16px}
+    h2{font-size:15px;margin:22px 0 12px}
+    .node-hero{padding:16px;gap:14px}
+    .hero-switch{width:100%;justify-content:space-between}
+    .stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .node-toolbar{flex-direction:column;align-items:stretch}
+    .node-toolbar .grow{width:100%;flex-wrap:wrap}
+    .node-toolbar .inline:last-child{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%}
+    .node-toolbar .inline:last-child .btn{width:100%;padding:9px 8px}
+    .actions{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .fields{grid-template-columns:1fr}
+    .scroll{max-height:none}
+    .logview{height:62vh}
+    .savebar{padding:10px 14px;gap:8px}
+    .savebar #saveHint{display:none}
+    .help-modal{padding:12px}
+    .help-box{max-height:92vh;border-radius:14px}
+    .help-head{padding:12px 15px}
+    .help-body{padding:14px 15px 18px}
+    .help-kv{grid-template-columns:96px minmax(0,1fr)}
+  }
+  @media (max-width:700px){
+    #tab-channels table{border:0;background:transparent;box-shadow:none;border-radius:0}
+    #tab-channels thead{display:none}
+    #tab-channels tbody{display:block}
+    #tab-channels tr{display:block;background:var(--panel);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;padding:6px 0;box-shadow:var(--shadow)}
+    #tab-channels td{display:flex;justify-content:space-between;align-items:center;gap:14px;border:0;padding:6px 14px;text-align:right}
+    #tab-channels td::before{content:attr(data-label);color:var(--muted);font-size:12px;font-weight:650;flex:none;text-align:left}
+    #tab-channels td:first-child{padding-top:10px}
+    #tab-channels td:last-child{padding-bottom:11px}
+    #tab-channels td.inline{justify-content:flex-end}
+    #tab-channels td.inline::before{margin-right:auto}
+    #tab-channels tr.current{background:var(--accent-soft)}
+    tbody tr:hover{background:var(--panel)}
+    .playing-wrap{grid-template-columns:1fr}
+    .cards{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:520px){
+    .brand{font-size:15px}
+    .tabs{padding:3px}
+    .tabs button{padding:6px 11px;font-size:12.5px}
+    .theme-toggle{padding:5px 10px;font-size:12px}
+    .pill{font-size:11px;padding:4px 9px}
+    .cards{grid-template-columns:1fr}
+    .stat-grid{grid-template-columns:1fr 1fr;gap:9px}
+    .stat{padding:11px 12px}
+    .stat .v{font-size:16px}
+    .actions{grid-template-columns:1fr}
+    .modal-box{padding:20px 18px}
+    .help-modal{padding:8px}
+    .help-box{max-height:93vh}
+    .help-head{padding:11px 13px;gap:7px}
+    .help-head b{font-size:13.5px}
+    .help-close{padding:3px 10px}
+    .help-body{padding:12px 13px 16px}
+    .help-kv{grid-template-columns:1fr;gap:1px}
+    .help-kv dt{margin-top:7px}
+    .help-sec{margin-top:13px;padding-top:13px}
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand">📺 直播源代理</div>
+  <div class="top-menu">
+    <div class="top-bar">
+      <button class="toggler" id="btnMenu" type="button" aria-label="菜单" aria-expanded="false">☰</button>
+      <div id="pill" class="pill">加载中…</div>
+    </div>
+    <nav class="tabs" id="mainTabs">
+      <button data-tab="overview" class="active">概览</button>
+      <button data-tab="config">配置</button>
+      <button data-tab="channels">频道</button>
+      <button data-tab="logs">日志</button>
+    </nav>
+  </div>
+  <button class="theme-toggle" id="btnTheme" type="button">🌙 夜间</button>
+</header>
+
+<main>
+  <section id="tab-overview">
+    <h2>运行概览 <button class="help-btn" type="button" data-help="overview">❓ 说明</button></h2>
+    <div class="cards">
+      <div class="card">
+        <div class="k">播放入口</div>
+        <div class="v"><a id="playlist" href="/list.m3u" target="_blank">/list.m3u</a></div>
+        <div class="sub" id="playlistSub"></div>
+      </div>
+      <div class="card">
+        <div class="k">缓冲池</div>
+        <div class="v"><span id="poolState" class="badge">—</span></div>
+        <div class="sub" id="poolSub">抗抖动余量</div>
+      </div>
+      <div class="card">
+        <div class="k">代理控制台</div>
+        <div class="v" style="font-size:16px"><a id="proxyConsoleLink" href="#" target="_blank">打开控制台</a></div>
+        <div class="sub" id="proxyConsoleSub">节点、订阅、流量与局域网共享</div>
+      </div>
+      <div class="card">
+        <div class="k">频道</div>
+        <div class="v" id="chCount">—</div>
+        <div class="sub" id="chActive"></div>
+      </div>
+      <div class="card">
+        <div class="k">缓存目录</div>
+        <div class="v" style="font-size:13px" id="cacheDir">—</div>
+        <div class="sub" id="cacheSub"></div>
+      </div>
+      <div class="card">
+        <div class="k">磁盘（缓存所在分区）</div>
+        <div class="v" style="font-size:16px" id="diskUse">—</div>
+        <div class="diskbar"><i id="diskBar" style="width:0"></i></div>
+        <div class="sub" id="diskSub"></div>
+      </div>
+      <div class="card">
+        <div class="k">服务运行时长</div>
+        <div class="v" id="svcUptime">—</div>
+        <div class="sub" id="svcUptimeSub"></div>
+      </div>
+      <div class="card">
+        <div class="k">内存占用</div>
+        <div class="v" id="svcMem">—</div>
+        <div class="sub" id="svcMemSub"></div>
+      </div>
+    </div>
+
+    <h2>正在播放</h2>
+    <div id="playingWrap" class="playing-wrap">
+      <div class="playing-empty">加载中…</div>
+    </div>
+
+    <h2>快捷操作</h2>
+    <div class="actions">
+      <button class="btn violet" id="btnRefreshSource">刷新源清单</button>
+      <button class="btn amber" id="btnClearCache">清空切片缓存</button>
+      <button class="btn coral" id="btnRestart">重启服务</button>
+    </div>
+    <p class="muted" style="margin-top:12px">提示：配置保存后大多立即生效；端口、监听地址、缓存目录需要重启服务。</p>
+  </section>
+
+  <section id="tab-config" hidden>
+    <h2>全部配置 <button class="help-btn" type="button" data-help="config">❓ 说明</button></h2>
+    <div id="configForm"></div>
+  </section>
+
+  <section id="tab-channels" hidden>
+    <h2>频道状态 <button class="help-btn" type="button" data-help="channels">❓ 说明</button></h2>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>ID</th><th>频道</th><th>状态</th><th id="chSegHead">缓存切片</th><th>已播切片</th><th>未播切片</th><th>剩余未播</th></tr></thead>
+        <tbody id="channelRows"><tr><td colspan="7" class="muted">加载中…</td></tr></tbody>
+      </table>
+    </div>
+    <p class="muted" style="margin-top:12px">
+      「缓存切片」= 当前窗口里还留着的片数和时长；「已播切片」= 这次起播累计取到的新切片（只增不减）；「未播切片」= 本地已经缓存好、播放器还没取走的片数，也就是它真正能拿来垫底的量；「剩余未播」= 播放器前方还有多少秒已经缓存好的内容。现在是立即起播：播放器拿到的清单直接指向最新一片，缓冲由本地预取维持。<br>
+      关闭「切片本地缓冲」后这一列显示「切片来源：直连」（切片从上游直接取、不落盘），此时已播/未播和剩余秒数改按上游清单滑动估算，仍是实时更新的。
+    </p>
+  </section>
+
+  <section id="tab-logs" hidden>
+    <h2>运行日志 <button class="help-btn" type="button" data-help="logs">❓ 说明</button></h2>
+    <div class="card" style="margin-bottom:14px">
+      <div class="inline" style="justify-content:space-between">
+        <div class="inline">
+          <input id="logFilter" type="text" placeholder="过滤关键字，如频道名 / 失败" style="width:260px">
+          <label class="inline" style="gap:6px"><input type="checkbox" id="logAuto" checked> 自动刷新</label>
+          <span class="muted" id="logCount">—</span>
+        </div>
+        <div class="inline">
+          <button class="btn" id="btnLogReload">重新加载</button>
+          <button class="btn" id="btnLogClear">清空显示</button>
+        </div>
+      </div>
+    </div>
+    <div id="logView" class="logview"><div class="logline sys">加载中…</div></div>
+    <p class="muted" style="margin-top:10px">日志保存在内存里（最近 1000 行），重启服务后清空。红色为失败/异常，绿色为成功/更新。</p>
+  </section>
+</main>
+
+<div id="helpPanel" class="help-modal" hidden>
+  <div class="help-box" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+    <div class="help-head">
+      <span class="help-badge">说明</span>
+      <b id="helpTitle"></b>
+      <button class="help-close" id="helpClose" type="button">关闭</button>
+    </div>
+    <div class="help-body" id="helpBody"></div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<div id="modal" class="modal" hidden>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <h3 id="modalTitle">确认操作</h3>
+    <p id="modalText"></p>
+    <div class="modal-actions">
+      <button class="btn" id="modalCancel">取消</button>
+      <button class="btn primary" id="modalOk">确定</button>
+    </div>
+  </div>
+</div>
+
+<div class="savebar">
+  <span class="muted" id="saveHint">修改后点右侧保存</span>
+  <span class="spacer"></span>
+  <button class="btn primary" id="btnSave">保存并应用</button>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var state = { config: null, schema: [], status: null, dirty: false, fieldMap: {}, logs: [], logLastId: 0, helpTab: '' };
+  var $ = function (s) { return document.querySelector(s); };
+  var $$ = function (s) { return Array.prototype.slice.call(document.querySelectorAll(s)); };
+
+  // 每个页面的说明文案：点对应页面的「说明」按钮打开，切换标签页时同步切换。
+  // 每页按「这页做什么 → 各项含义 → 怎么操作 → 注意」组织，尽量做到不看文档也能上手。
+  var HELP = {
+    overview: {
+      title: '概览页 · 功能与操作说明',
+      body: [
+        {
+          h: '这页是干什么的',
+          html: '<p>播放服务的<b>总览面板</b>：一眼看到播放地址、频道、缓存和磁盘状态，并集中放置常用操作。页面每 <b>5 秒</b>自动刷新一次，不需要手动刷新。代理、节点、订阅与流量统计已经拆分到独立的<b>代理控制台</b>，点概览里的「代理控制台」卡片即可打开。</p>'
+        },
+        {
+          h: '状态卡片逐项说明',
+          html: '<dl class="help-kv">' +
+            '<dt>播放入口</dt><dd>把 <code>http://盒子IP:8317/list.m3u</code> 填进电视、手机或播放器的「直播源」里。点这个地址可以直接下载清单查看。单个频道也能单独播：<code>/s/频道ID/index.m3u8</code>。</dd>' +
+            '<dt>缓冲池</dt><dd>抗抖动的核心。显示当前池子有多少秒：盒子会把最新这 N 秒的切片<b>只留在本地、先不下发</b>，播放器因此始终落后直播约 N 秒。上游抖动或短暂断流时，播放器还在吃已经下发的那段，池子同时继续补齐，画面就不会卡。<b>池子越大越稳、延迟越高</b>；显示「未开启」表示贴着直播边缘，最省延迟但上游一抖就卡；关闭「切片本地缓冲」后显示「已停用」（切片直连上游，不再缓存）。修改点「去配置里修改」。</dd>' +
+            '<dt>代理控制台</dt><dd>代理开关、节点、订阅、mihomo、流量统计和局域网共享都在独立的代理控制台里（默认端口 <code>8318</code>）。点这张卡片会打开控制台页面。</dd>' +
+            '<dt>频道</dt><dd>源清单里的频道总数；下面一行是<b>此刻正在播放</b>的频道数、后台正在拉流（缓冲池/本地缓存）的频道数，以及已解析出的可用上游地址条数。切片直连模式下也能看到「正在播放」。</dd>' +
+            '<dt>缓存目录</dt><dd>切片实际存放路径和容量上限。达到上限后会自动删除最旧的切片，不会把磁盘撑爆。</dd>' +
+            '<dt>磁盘</dt><dd>缓存目录所在分区的占用。正常为绿色，<b>≥75% 变黄</b>、<b>≥90% 变红</b>。变红时建议清空切片缓存或调大磁盘。</dd>' +
+            '<dt>服务运行时长</dt><dd>当前代理进程已经连续运行多久，下面一行是启动时刻。点「重启服务」或服务异常退出后会重新计时；运行时长不断跳回几秒，说明进程在反复重启，可去「日志」页找报错。</dd>' +
+            '<dt>内存占用</dt><dd>代理进程占用的物理内存（RSS），下面一行是 JS 堆的已用/总量和峰值。常驻几十 MB 属正常；若长时间只涨不降并逼近盒子内存，建议重启服务。</dd>' +
+            '</dl>'
+        },
+        {
+          h: '正在播放',
+          html: '<p>只列出<b>此刻真的在被播放</b>的频道，显示频道名、ID、切片来源（本地缓存或直连）、以及播放器前方还能播多少秒。没有播放时会显示「当前没有正在播放的频道」，并提示有多少个频道在后台拉流。</p>' +
+            '<ul class="help-list">' +
+            '<li>切片缓存在本地时：播放器取过切片就算正在播放，并显示已播片数、前方可播秒数和池内秒数。</li>' +
+            '<li>切片直连上游时：最近 1 分钟内反复来取清单就算正在播放，显示「切片直连 · 当前清单 N 片」，已播片数按清单滑动估算。</li>' +
+            '<li>播放器缓存的清单可能继续要片，停止播放约 <b>30 秒</b>后才会从列表消失。</li>' +
+            '</ul>'
+        },
+        {
+          h: '快捷操作（按钮颜色对应功能）',
+          html: '<ol class="help-steps">' +
+            '<li><b>紫色 · 刷新源清单</b>：重新下载源 m3u 并重建频道列表。适合源站更新频道、或刚改了「源清单地址」之后使用。</li>' +
+            '<li><b>橙色 · 清空切片缓存</b>：删除本地已缓存的切片，释放磁盘。正在播放的频道需要重新拉流，可能短暂卡顿 1~3 秒。</li>' +
+            '<li><b>红色 · 重启服务</b>：重启整个代理进程，所有连接会断开，盒子一般需要 <b>10~25 秒</b>恢复。页面会自动等待并刷新，不用手动刷新。</li>' +
+            '</ol>'
+        },
+        {
+          h: '常见场景怎么做',
+          html: '<ul class="help-list">' +
+            '<li><b>新设备要接进来</b>：复制「播放入口」地址，填到播放器的直播源里即可，无需额外设置。</li>' +
+            '<li><b>画面卡顿</b>：代理相关问题去「代理控制台 → 节点」测速或换节点；再看磁盘是否变黄/变红，必要时清空缓存。</li>' +
+            '<li><b>频道缺失或过期</b>：点紫色「刷新源清单」；仍然没有就检查「配置 → 服务 → 源清单地址」。</li>' +
+            '<li><b>换了机场订阅</b>：打开代理控制台，在「订阅」页改地址（一行一个，可填多个）并保存，再点「立即更新订阅」。</li>' +
+            '</ul>'
+        },
+        { h: '小提示', html: '<div class="help-tip ok">手机/平板上顶栏会收成 <b>☰ 菜单</b>，点一下展开标签页；再点一下收起。右上角的 🌙 / ☀️ 可以切换日间和夜间模式，选择会记住。</div>' }
+      ]
+    },
+    config: {
+      title: '配置页 · 功能与操作说明',
+      body: [
+        {
+          h: '这一页怎么用',
+          html: '<ol class="help-steps">' +
+            '<li>配置按 <b>服务、播放与缓冲、上游请求、缓存</b> 四组排列，点分组标题可展开/收起。</li>' +
+            '<li>修改任意一项后，右下角会提示「有未保存的修改」，点 <b>「保存并应用」</b> 才会写入 <code>config.json</code> 并生效。</li>' +
+            '<li>绝大多数配置<b>立即生效</b>；只有 <b>监听端口、监听地址、缓存目录</b> 修改后需要点「重启服务」。</li>' +
+            '<li>输入框右侧的小字是单位或取值范围；开关样式的项点一下即可切换。切换标签页不会丢失未保存的修改，但关闭页面会丢失。</li>' +
+            '</ol>'
+        },
+        {
+          h: '服务',
+          html: '<dl class="help-kv">' +
+            '<dt>监听端口</dt><dd>管理页和播放地址使用的端口，默认 <code>8317</code>。修改后需要重启。</dd>' +
+            '<dt>监听地址</dt><dd><code>0.0.0.0</code> = 局域网设备都能访问；<code>127.0.0.1</code> = 只允许盒子本机。修改后需要重启。</dd>' +
+            '<dt>源清单地址</dt><dd>m3u 的网址或本地文件路径。留空会回落到盒子上的 <code>tv.m3u</code>。换源后点概览页「刷新源清单」。</dd>' +
+            '<dt>源清单刷新间隔</dt><dd>每隔多少分钟自动重新下载一次源清单，<code>0</code> = 不自动刷新。</dd>' +
+            '<dt>管理页面密码</dt><dd>留空 = 局域网免密；填了之后打开 <code>/admin</code> 会弹浏览器登录框，<b>用户名随意，密码填这里</b>。保存后页面会自动刷新要求重新登录。</dd>' +
+            '</dl>'
+        },
+        {
+          h: '播放与缓冲',
+          html: '<dl class="help-kv">' +
+            '<dt>缓冲池</dt><dd><b>抗抖动的关键项</b>。盒子把最新 N 秒的切片先扣在自己这里、不写进给播放器的清单，播放器于是始终落后直播约 N 秒。上游限速、清单卡住、CDN 抽风时，播放器手里还有已下发的片段可播，池子同时继续补齐，所以画面不会卡。<b>数值越大越稳，直播延迟也越大</b>；建议 <code>20~40</code> 秒。填 <code>0</code> = 关闭（贴直播边缘，最省延迟）。注意：换台后需要约 N 秒把池子攒满，攒满前会自动少扣几片，保证立刻有画面。<b>关闭「开启切片本地缓冲」时此项自动停用</b>（切片直连上游，不缓存）。</dd>' +
+            '<dt>开启切片本地缓冲</dt><dd><b>推荐开启</b>：盒子提前把切片下载到本地，播放器只读盒子。关闭后清单和切片都直接指向上游，盒子只做转发，<b>不下载、不落盘、不缓存</b>；缓冲池与缓冲深度也随之停用（关闭时这两项会置灰）。</dd>' +
+            '<dt>缓冲深度</dt><dd>本地一共保留多少秒切片（包含上面的缓冲池）。建议 <b>= 缓冲池 + 20 秒以上</b>，例如池子 30 秒就填 60。填 <code>0</code> = 用「播放列表窗口」的默认值（约 18 片）。关闭「开启切片本地缓冲」时此项同样停用。</dd>' +
+            '<dt>预热频道数</dt><dd>同时保持预存的频道数量：<code>0</code> = 只当前频道；<code>N</code> = 当前 + 最近看过的 N 个；<code>-1</code> = 全部（请求量很大，不建议）。</dd>' +
+            '<dt>回源刷新间隔</dt><dd>每隔多久向上游拉一次清单，<code>0</code> = 自动（约 1~3 秒）。调大能减少回源，但新切片到手更晚，池子更容易被吃薄。</dd>' +
+            '<dt>空闲停流时间</dt><dd>多久没收到某频道的请求就停止后台拉流，避免没人看还一直占带宽。</dd>' +
+            '</dl>'
+        },
+        {
+          h: '上游请求',
+          html: '<dl class="help-kv">' +
+            '<dt>默认 User-Agent</dt><dd>请求上游时使用的 UA。mcp 源需要 <code>qqlive</code>，一般不用改。</dd>' +
+            '<dt>强制 User-Agent</dt><dd>非空时覆盖所有频道的 UA，留空表示不强制。</dd>' +
+            '<dt>多码率选择</dt><dd>上游提供多档清晰度时选哪档：最高画质 / 最低画质 / 优先 1080p / 720p / 480p。</dd>' +
+            '<dt>清单请求超时</dt><dd>请求 m3u 清单的最长等待时间（毫秒）。上游慢时调大。</dd>' +
+            '<dt>切片请求超时</dt><dd>请求单个视频切片的最长等待时间（毫秒）。</dd>' +
+            '<dt>切片重试次数</dt><dd>切片失败后的重试次数，网络差可调到 4~5。</dd>' +
+            '<dt>清单重试次数</dt><dd>清单失败后的重试次数。</dd>' +
+            '<dt>强制 IPv4</dt><dd>盒子 IPv6 半通时打开，避免每个请求先卡一次 IPv6 超时。</dd>' +
+            '<dt>自动切换同名源</dt><dd>当前源挂了是否自动换同名频道的其他源。关闭后「点哪条源就用哪条」，绝不跨源。</dd>' +
+            '<dt>拒收演示/广告片</dt><dd>上游返回 jsdelivr 演示片时判为失败，继续找真源。</dd>' +
+            '<dt>curl 兜底</dt><dd>Node 解析响应失败时改用系统 curl 再请求一次，对畸形响应更宽容。</dd>' +
+            '<dt>调试日志</dt><dd>打印每个上游请求的状态与耗时。排查问题时临时打开，平时关闭避免日志过多。</dd>' +
+            '</dl>'
+        },
+        {
+          h: '缓存',
+          html: '<p>「缓存目录」是切片存放位置，相对路径基于程序目录，修改后需重启；「缓存上限」单位 MB，<code>0</code> = 不限制。超过上限会自动删除最旧的切片。</p>'
+        },
+        {
+          h: '推荐改法',
+          html: '<ul class="help-list">' +
+            '<li><b>经常卡顿</b>：缓冲深度调到 90 秒、切片重试 4 次、强制 IPv4 打开。</li>' +
+            '<li><b>盒子资源紧张</b>：关闭切片本地缓冲、缓存上限调到 1024 MB、预热频道数保持 0。</li>' +
+            '<li><b>刚换源</b>：改「源清单地址」→ 保存 → 概览页点「刷新源清单」。</li>' +
+            '</ul>'
+        }
+      ]
+    },
+    channels: {
+      title: '频道页 · 功能与操作说明',
+      body: [
+        {
+          h: '这页是干什么的',
+          html: '<p>列出源清单里的所有频道，以及每个频道的 ID、拉流/播放状态、缓存与播放进度。正在播放或后台拉流的频道会自动排在最前并高亮。页面每 5 秒刷新。</p>'
+        },
+        {
+          h: '各列含义',
+          html: '<dl class="help-kv">' +
+            '<dt>ID</dt><dd>频道名生成的短 ID，用于播放地址和缓存目录，例如 <code>CCTV-1 综合 → cctv1</code>、<code>北京卫视 → bjws</code>、<code>CCTV-5+ 体育赛事 → cctv5p</code>。单个频道的播放地址是 <code>/s/&lt;ID&gt;/index.m3u8</code>。</dd>' +
+            '<dt>状态</dt><dd><b>播放中</b> = 最近有播放器在取流；<b>拉流中</b> = 后台正在缓存/刷新；<b>空闲</b> = 没人看也没有预取。</dd>' +
+            '<dt>缓存切片</dt><dd>本地当前保留的切片数与总时长，也就是抗抖动缓冲的厚度。关闭「切片本地缓冲」后这一列变成「切片来源」，显示<b>直连</b>（切片从上游直接取、不落盘），后面是上游清单当前的片数。</dd>' +
+            '<dt>已播切片</dt><dd>这次起播以来累计取到的新切片（只增不减），可以判断播放器是否真的在推进。切片直连模式下看不到切片请求，按上游清单的 MEDIA-SEQUENCE 滑动估算。</dd>' +
+            '<dt>未播切片</dt><dd>已经缓存好、播放器还没取走的片数，是真正能拿来垫底的量。切片直连模式下等于上游清单里排在当前进度后面的片数。</dd>' +
+            '<dt>剩余未播</dt><dd>播放器前方还有多少秒缓存好的内容（含末尾缓冲池）。≤18 秒变黄、≤6 秒变红，说明快追平下发边缘了。下面一行拆成两段：<b>池内</b> = 被扣在盒子、还没下发的抗抖动余量；<b>已下发</b> = 已经写进清单、播放器随时能取的量。</dd>' +
+            '</dl>'
+        },
+        {
+          h: '立即起播与缓冲池',
+          html: '<p>换台时清单直接指向<b>手上最新的切片</b>，不等预存、不强行倒退，所以几乎立刻出画面。抗抖动不靠“起播时多等几秒”，而是靠<b>缓冲池</b>：盒子把最新 N 秒的切片扣在本地（概览卡片显示当前秒数），播放器因此稳稳落后直播 N 秒，上游抖一下也在池子里消化掉。池子还没攒满时，扣留片数会自动减少，保证播放器始终有 3 片以上可播。</p>' +
+            '<div class="help-tip">缓冲池依附于「开启切片本地缓冲」：关掉后切片直连上游、盒子不缓存任何切片，缓冲池显示「已停用」。想看“池子现在有多厚”，看「剩余未播」和它下面那行「池内 Ns」；池内秒数长期明显小于设置值，说明上游供片慢或回源间隔太大。</div>'
+        },
+        {
+          h: '常见排查',
+          html: '<ol class="help-steps">' +
+            '<li><b>确认播放器有没有真的连上</b>：看该频道状态是否变成「播放中」、已播切片是否在涨。</li>' +
+            '<li><b>画面卡住</b>：看「剩余未播」是否接近 0；持续为 0 说明上游供片慢，可去代理控制台换节点或调大缓冲深度。</li>' +
+            '<li><b>频道列表不对</b>：回概览页点「刷新源清单」，或检查「配置 → 服务 → 源清单地址」。</li>' +
+            '<li><b>找不到频道 ID</b>：在本页搜索频道名，第一列就是 ID，可直接拼成播放地址。</li>' +
+            '</ol>'
+        },
+        { h: '小提示', html: '<div class="help-tip ok">手机/平板上表格会自动变成卡片式，每行左侧是字段名、右侧是值，不需要左右拖动。</div>' }
+      ]
+    },
+    logs: {
+      title: '日志页 · 功能与操作说明',
+      body: [
+        {
+          h: '日志从哪来',
+          html: '<p>这里显示服务最近的运行日志，内存中保留 <b>最近 1000 行</b>，重启服务后清空。日志同时也会写到 systemd（<code>journalctl -u m3u-proxy</code>）。</p>'
+        },
+        {
+          h: '工具栏怎么用',
+          html: '<dl class="help-kv">' +
+            '<dt>过滤关键字</dt><dd>输入频道名、域名或「失败」「超时」「代理」等词，只显示包含该词的日志，实时生效。</dd>' +
+            '<dt>自动刷新</dt><dd>勾选后每 2.5 秒自动拉取新日志；取消勾选可暂停，方便慢慢看。</dd>' +
+            '<dt>重新加载</dt><dd>重新拉取最近 1000 行，适合页面开了很久之后重新同步。</dd>' +
+            '<dt>清空显示</dt><dd>只清当前页面显示，不影响服务端记录，也不影响 journalctl。</dd>' +
+            '</dl>'
+        },
+        {
+          h: '线路与状态符号',
+          html: '<ul class="help-list">' +
+            '<li><code>🌐 走代理</code>：这次请求经订阅节点转发，后面会注明 AUTO 还是固定节点。</li>' +
+            '<li><code>🔌 直连</code>：这次请求没走代理，可能是域名不在代理列表，或代理总开关已关闭。</li>' +
+            '<li><code>🔄 代理出口切换</code>：AUTO 选中的节点变了，会显示新旧节点和延迟。</li>' +
+            '<li><code>📡 拉取清单</code>：请求频道清单；<code>↗ 200</code> 是上游响应状态与耗时。</li>' +
+            '</ul>' +
+            '<div class="help-tip">同一域名的线路日志按 <b>60 秒</b>去重，不会因为切片请求刷屏。</div>'
+        },
+        {
+          h: '颜色含义',
+          html: '<p><b style="color:#b42318">红色</b> = 失败 / 异常 / 超时 / 不可用；<b style="color:#a16207">黄色</b> = 出口切换等需要注意的事件；<b style="color:#067647">绿色</b> = 成功、已更新、已恢复、切台；灰色 = 系统提示。</p>'
+        },
+        {
+          h: '常见排查顺序',
+          html: '<ol class="help-steps">' +
+            '<li>过滤频道名，看有没有 <code>200</code> 和「拉取清单」，确认请求是否到达上游。</li>' +
+            '<li>过滤「失败」「超时」，看是清单还是切片出问题；连续超时优先怀疑节点或上游。</li>' +
+            '<li>过滤「走代理」「直连」「出口切换」，确认请求走的线路和节点是否正常。</li>' +
+            '<li>需要更细的每个请求耗时，去「配置 → 上游请求 → 调试日志」临时开启。</li>' +
+            '</ol>'
+        }
+      ]
+    }
+  };
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function toast(msg, type) {
+    var el = document.createElement('div');
+    el.className = 'toast ' + (type || '');
+    el.textContent = msg;
+    $('#toast').appendChild(el);
+    setTimeout(function () {
+      el.style.opacity = '0';
+      el.style.transition = 'opacity .3s';
+      setTimeout(function () { el.remove(); }, 320);
+    }, type === 'err' ? 7000 : 3500);
+  }
+
+  // 自定义确认弹窗（比浏览器 confirm() 好看，也支持 Esc/回车/点遮罩关闭）
+  function askConfirm(title, message, okText, cancelText) {
+    return new Promise(function (resolve) {
+      var modal = $('#modal');
+      var btnOk = $('#modalOk');
+      var btnCancel = $('#modalCancel');
+      $('#modalTitle').textContent = title || '确认操作';
+      $('#modalText').textContent = message || '';
+      btnOk.textContent = okText || '确定';
+      btnCancel.textContent = cancelText || '取消';
+      modal.hidden = false;
+
+      function done(val) {
+        modal.hidden = true;
+        document.removeEventListener('keydown', onKey);
+        btnOk.removeEventListener('click', onOk);
+        btnCancel.removeEventListener('click', onCancel);
+        modal.removeEventListener('click', onBackdrop);
+        resolve(val);
+      }
+      function onOk() { done(true); }
+      function onCancel() { done(false); }
+      function onKey(e) {
+        if (e.key === 'Escape') done(false);
+        else if (e.key === 'Enter') done(true);
+      }
+      function onBackdrop(e) { if (e.target === modal) done(false); }
+
+      btnOk.addEventListener('click', onOk);
+      btnCancel.addEventListener('click', onCancel);
+      modal.addEventListener('click', onBackdrop);
+      document.addEventListener('keydown', onKey);
+      setTimeout(function () { btnOk.focus(); }, 30);
+    });
+  }
+
+  // ---------- 页面说明 ----------
+  function showHelp(tab) {
+    var h = HELP[tab];
+    if (!h) return;
+    state.helpTab = tab;
+    $('#helpTitle').textContent = h.title;
+    $('#helpBody').innerHTML = h.body.map(function (s) {
+      return '<div class="help-sec"><h4>' + s.h + '</h4><div>' + s.html + '</div></div>';
+    }).join('');
+    var panel = $('#helpPanel');
+    panel.hidden = false;
+    document.body.classList.add('help-lock');
+    // 每次打开都从顶部开始看
+    try { $('#helpBody').scrollTop = 0; } catch (e) {}
+    setTimeout(function () { try { $('#helpClose').focus(); } catch (e) {} }, 30);
+  }
+
+  function hideHelp() {
+    state.helpTab = '';
+    $('#helpPanel').hidden = true;
+    document.body.classList.remove('help-lock');
+  }
+
+  $$('.help-btn').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var tab = b.dataset.help;
+      if (!$('#helpPanel').hidden && state.helpTab === tab) hideHelp();
+      else showHelp(tab);
+    });
+  });
+  $('#helpClose').addEventListener('click', hideHelp);
+  // 点遮罩关闭
+  $('#helpPanel').addEventListener('click', function (e) {
+    if (e.target === this) hideHelp();
+  });
+  // Esc 关闭（和确认弹窗共用键盘，但各管各的）
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !$('#helpPanel').hidden) hideHelp();
+  });
+
+  async function api(path, opts) {
+    opts = opts || {};
+    if (opts.body && typeof opts.body !== 'string') {
+      opts.body = JSON.stringify(opts.body);
+      opts.headers = Object.assign({ 'Content-Type': 'application/json' }, opts.headers || {});
+    }
+    var res = await fetch(path, opts);
+    var text = await res.text();
+    var data = null;
+    try { data = text ? JSON.parse(text) : {}; } catch (e) { data = { text: text }; }
+    if (!res.ok) {
+      if (res.status === 401) throw new Error('需要管理密码，请刷新页面重新登录');
+      throw new Error((data && data.error) || ('HTTP ' + res.status));
+    }
+    return data;
+  }
+
+  function fmtTime(ts) {
+    if (!ts) return '从未';
+    var d = new Date(ts);
+    return d.toLocaleString('zh-CN', { hour12: false });
+  }
+
+  // 月/日 时:分，给流量统计起点这种“很久以前”的时间用，卡片里不会换行难看
+  function fmtShortTime(ts) {
+    if (!ts) return '—';
+    var d = new Date(ts);
+    function p(n) { return (n < 10 ? '0' : '') + n; }
+    return (d.getMonth() + 1) + '/' + d.getDate() + ' ' + p(d.getHours()) + ':' + p(d.getMinutes());
+  }
+
+  function fmtDur(sec) {
+    sec = Math.max(0, Math.round(Number(sec) || 0));
+    var m = Math.floor(sec / 60);
+    var s = sec % 60;
+    if (!m) return s + ' 秒';
+    return m + ' 分' + (s ? s + ' 秒' : '');
+  }
+
+  // 长时长（运行时长）：天/小时/分钟，最多三段
+  function fmtLongDur(sec) {
+    sec = Math.max(0, Math.round(Number(sec) || 0));
+    var d = Math.floor(sec / 86400);
+    var h = Math.floor((sec % 86400) / 3600);
+    var m = Math.floor((sec % 3600) / 60);
+    if (d) return d + ' 天' + (h ? ' ' + h + ' 小时' : '');
+    if (h) return h + ' 小时' + (m ? ' ' + m + ' 分' : '');
+    if (m) return m + ' 分';
+    return sec + ' 秒';
+  }
+
+  function setServiceState(svc) {
+    var upEl = $('#svcUptime');
+    var upSub = $('#svcUptimeSub');
+    var memEl = $('#svcMem');
+    var memSub = $('#svcMemSub');
+    if (!svc || svc.uptimeSeconds == null) {
+      upEl.textContent = '—';
+      upSub.textContent = '接口未返回运行信息';
+      memEl.textContent = '—';
+      memSub.textContent = '';
+      return;
+    }
+    upEl.textContent = fmtLongDur(svc.uptimeSeconds);
+    upSub.textContent = '自 ' + fmtShortTime(svc.startedAt) + ' 启动';
+    memEl.textContent = fmtSize(svc.rss);
+    var sub = '堆 ' + fmtSize(svc.heapUsed) + ' / ' + fmtSize(svc.heapTotal);
+    if (svc.peakRss) sub += ' · 峰值 ' + fmtSize(svc.peakRss);
+    memSub.textContent = sub;
+  }
+
+  function ago(ts) {
+    if (!ts) return '';
+    var s = Math.floor((Date.now() - ts) / 1000);
+    if (s < 60) return s + ' 秒前';
+    if (s < 3600) return Math.floor(s / 60) + ' 分钟前';
+    if (s < 86400) return Math.floor(s / 3600) + ' 小时前';
+    return Math.floor(s / 86400) + ' 天前';
+  }
+
+  function delayClass(d) {
+    if (d == null) return 'warn';
+    if (d <= 0) return 'bad';
+    if (d < 300) return 'ok';
+    if (d < 800) return 'warn';
+    return 'bad';
+  }
+  function delayText(d) {
+    if (d == null) return '未测';
+    if (d <= 0) return '超时';
+    return d + ' ms';
+  }
+
+  // ---------- 标签页 ----------
+  function switchTab(name) {
+    $$('.tabs button').forEach(function (b) { b.classList.toggle('active', b.dataset.tab === name); });
+    ['overview', 'config', 'channels', 'logs'].forEach(function (t) {
+      $('#tab-' + t).hidden = t !== name;
+    });
+    if (typeof menuOpen === 'function') menuOpen(false);
+    if (name === 'overview') loadStatus();
+    if (name === 'channels') loadStatus();
+    if (name === 'logs') loadLogs(true);
+    // 说明面板开着时，跟着当前标签页切换内容
+    if (!$('#helpPanel').hidden) showHelp(name);
+    // 切页回到顶部，手机上不用手动往上滑
+    try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) { window.scrollTo(0, 0); }
+  }
+  $$('.tabs button').forEach(function (b) {
+    b.addEventListener('click', function () { switchTab(b.dataset.tab); });
+  });
+
+  // 窄屏下把顶栏菜单收进 ☰ 里：点汉堡展开/收起；点任意标签或切回宽屏时自动收起
+  function menuOpen(v) {
+    var tabs = $('#mainTabs');
+    var btn = $('#btnMenu');
+    if (!tabs) return;
+    var open = v == null ? !tabs.classList.contains('open') : !!v;
+    tabs.classList.toggle('open', open);
+    if (btn) {
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.textContent = open ? '✕' : '☰';
+    }
+  }
+  var mqNarrow = window.matchMedia('(max-width:820px)');
+  $('#btnMenu').addEventListener('click', function () { menuOpen(); });
+  if (typeof mqNarrow.addEventListener === 'function') {
+    mqNarrow.addEventListener('change', function (e) { if (!e.matches) menuOpen(false); });
+  }
+  $$('#mainTabs button').forEach(function (b) {
+    b.addEventListener('click', function () { menuOpen(false); });
+  });
+
+  // ---------- 配置 ----------
+  function fieldControl(f, val) {
+    var v = val == null ? '' : val;
+    if (f.type === 'boolean') {
+      return '<label class="switch"><input type="checkbox" data-key="' + esc(f.key) + '"' + (v ? ' checked' : '') + '><span></span></label>';
+    }
+    if (f.type === 'select') {
+      var opts = (f.options || []).map(function (o) {
+        return '<option value="' + esc(o.value) + '"' + (String(v) === String(o.value) ? ' selected' : '') + '>' + esc(o.label) + '</option>';
+      }).join('');
+      return '<select data-key="' + esc(f.key) + '">' + opts + '</select>';
+    }
+    if (f.type === 'urls') {
+      var lines = Array.isArray(v) ? v.join('\n') : String(v || '');
+      return '<textarea data-key="' + esc(f.key) + '" rows="' + (f.rows || 3) + '" spellcheck="false" ' +
+        'placeholder="每行一个地址">' + esc(lines) + '</textarea>';
+    }
+    var type = f.type === 'number' ? 'number' : (f.type === 'password' ? 'password' : 'text');
+    var attrs = ' data-key="' + esc(f.key) + '" value="' + esc(v) + '"';
+    if (f.min != null) attrs += ' min="' + f.min + '"';
+    if (f.max != null) attrs += ' max="' + f.max + '"';
+    if (f.type === 'number') attrs += ' step="1"';
+    var input = '<input type="' + type + '"' + attrs + '>';
+    if (f.unit) input = '<div class="input">' + input + '<span class="unit">' + esc(f.unit) + '</span></div>';
+    return input;
+  }
+
+  function markDirty() {
+    state.dirty = true;
+    $('#saveHint').textContent = '有未保存的修改';
+  }
+
+  function bindFieldEvents(root) {
+    Array.prototype.slice.call(root.querySelectorAll('input, select, textarea')).forEach(function (el) {
+      el.addEventListener('input', markDirty);
+      el.addEventListener('change', markDirty);
+    });
+    var master = root.querySelector('[data-key="segmentsEnabled"]');
+    if (master) master.addEventListener('change', function () { syncSegDeps(root); });
+    syncSegDeps(root);
+  }
+
+  // 切片本地缓冲关闭时，缓冲池/缓冲深度都没有意义（切片直连上游，不落盘），一起置灰
+  function syncSegDeps(root) {
+    var scope = root || document;
+    var master = scope.querySelector('[data-key="segmentsEnabled"]');
+    if (!master) return;
+    var on = master.checked;
+    ['bufferPoolSeconds', 'bufferSeconds'].forEach(function (key) {
+      var el = scope.querySelector('[data-key="' + key + '"]');
+      if (!el) return;
+      el.disabled = !on;
+      var field = el.closest('.field');
+      if (field) field.classList.toggle('disabled', !on);
+    });
+  }
+
+  function groupHtml(g) {
+    var html = '<details class="group" open><summary><span>' + esc(g.group) + '</span>';
+    if (g.action) {
+      html += '<span class="gact"><button class="btn tiny" data-group-action="' + esc(g.action.action) + '">' +
+        esc(g.action.label) + '</button></span>';
+    }
+    html += '</summary>';
+    if (g.desc) html += '<div class="desc">' + esc(g.desc) + '</div>';
+    html += '<div class="fields">';
+    g.fields.forEach(function (f) {
+      state.fieldMap[f.key] = f;
+      if (f.key === 'proxyEnabled') return; // 代理总开关在节点页顶部单独渲染
+      var val = state.config[f.key];
+      if (f.type === 'tags' && Array.isArray(val)) val = val.join(', ');
+      html += '<div class="field' + (f.wide ? ' wide' : '') + '">';
+      html += '<label>' + esc(f.label) + '</label>';
+      html += fieldControl(f, val);
+      if (f.desc) html += '<div class="hint">' + esc(f.desc) + '</div>';
+      html += '</div>';
+    });
+    html += '</div></details>';
+    return html;
+  }
+
+  function renderConfig() {
+    var html = '';
+    state.schema.forEach(function (g) {
+      if (g.page === 'nodes') return; // 「代理与节点」已整体搬到节点页
+      html += groupHtml(g);
+    });
+    $('#configForm').innerHTML = html;
+    bindFieldEvents($('#configForm'));
+
+    // 组标题里的操作按钮（目前没有分组用到，保留扩展）
+    $$('#configForm [data-group-action]').forEach(function (b) {
+      b.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (b.dataset.groupAction === 'updateSubscription') updateSubscription(b);
+      });
+    });
+  }
+
+  function collectConfig() {
+    var out = {};
+    $$('[data-key]').forEach(function (el) {
+      var f = state.fieldMap[el.dataset.key];
+      if (!f) return;
+      if (f.type === 'boolean') out[el.dataset.key] = el.checked;
+      else if (f.type === 'number') out[el.dataset.key] = Number(el.value);
+      else if (f.type === 'urls') out[el.dataset.key] = String(el.value || '')
+        .split(/\r?\n/)
+        .map(function (s) { return s.trim(); })
+        .filter(Boolean);
+      else out[el.dataset.key] = el.value;
+    });
+    return out;
+  }
+
+  async function saveConfig() {
+    var btn = $('#btnSave');
+    var payload = collectConfig();
+    var oldPass = state.config ? String(state.config.adminPassword || '') : '';
+    var passChanged = Object.prototype.hasOwnProperty.call(payload, 'adminPassword') && String(payload.adminPassword) !== oldPass;
+    btn.disabled = true;
+    try {
+      var r = await api('/api/admin/config', { method: 'POST', body: { config: payload } });
+      state.dirty = false;
+      $('#saveHint').textContent = '已保存';
+      if (passChanged) {
+        toast('管理密码已修改，页面即将刷新，请用新密码重新登录', 'ok');
+        setTimeout(function () { location.reload(); }, 1800);
+        return;
+      }
+      toast(r.restartRequired ? '已保存，部分设置需要重启服务后生效' : '配置已保存并应用', 'ok');
+      await loadConfig();
+      await loadStatus();
+    } catch (e) {
+      toast('保存失败：' + e.message, 'err');
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  async function loadConfig() {
+    var data = await api('/api/admin/config');
+    state.config = data.config;
+    state.schema = data.schema;
+    setPoolState(data.config.bufferPoolSeconds, data.config.segmentsEnabled);
+    renderConfig();
+  }
+
+  // 概览页只展示缓冲池状态，修改入口在「配置 → 播放与缓冲」
+  function setPoolState(poolSec, segEnabled) {
+    var el = $('#poolState');
+    if (!el) return;
+    var sec = Number(poolSec) || 0;
+    var local = segEnabled !== false;
+    // 切片本地缓冲关闭 → 切片直连上游，缓冲池自动停用
+    el.textContent = !local ? '已停用' : (sec > 0 ? sec + ' 秒' : '未开启');
+    el.className = 'badge ' + (local && sec > 0 ? 'ok' : 'warn');
+    var sub = $('#poolSub');
+    if (sub) {
+      sub.innerHTML =
+        (!local
+          ? '切片本地缓冲已关闭：切片直连上游、不缓存，缓冲池同时停用'
+          : (sec > 0 ? '播放器落后直播约 ' + sec + ' 秒，换取抗抖动' : '贴着直播边缘，上游一抖就卡') +
+            ' · 切片本地缓存：开') +
+        ' · <a href="#" class="goto-pool">去配置里修改</a>';
+    }
+  }
+
+  // 代理控制台入口：代理、节点、订阅、流量、共享都在独立端口上
+  function setProxyConsoleLink(port) {
+    var link = $('#proxyConsoleLink');
+    if (!link) return;
+    var p = Number(port) || 8318;
+    var host = location.hostname || '127.0.0.1';
+    var url = 'http://' + host + ':' + p + '/admin';
+    link.href = url;
+    link.textContent = host + ':' + p;
+    var sub = $('#proxyConsoleSub');
+    if (sub) sub.textContent = '节点、订阅、流量与局域网共享（独立进程）';
+  }
+
+  // ---------- 概览 / 频道 ----------
+  async function loadStatus() {
+    try {
+      var data = await api('/api/admin/status');
+      state.status = data;
+      var chs = data.channels || [];
+      var active = chs.filter(function (c) { return c.active; }).length;
+      var cached = chs.reduce(function (a, c) { return a + (c.cached || 0); }, 0);
+      $('#chCount').textContent = chs.length + ' 个';
+      var playing = chs.filter(function (c) { return c.playing; }).length;
+      $('#chActive').textContent = playing + ' 个正在播放 · ' + active + ' 个正在拉流 · 地址表 ' + cached + ' 条';
+      $('#cacheDir').textContent = data.config.cacheDir;
+      $('#cacheSub').textContent = '容量上限 ' + (state.config ? state.config.maxCacheMB : '?') + ' MB';
+      renderDisk(data.disk);
+      setServiceState(data.service);
+      setPoolState(data.config.bufferPoolSeconds, data.config.segmentsEnabled);
+      setProxyConsoleLink(data.proxyConsolePort);
+      renderChannels(chs);
+      renderPlaying(chs);
+      setPill(true);
+    } catch (e) {
+      setPill(false, e.message);
+    }
+  }
+
+  function fmtSize(n) {
+    if (n == null || !isFinite(n) || n < 0) return '—';
+    var u = ['B', 'KB', 'MB', 'GB', 'TB'];
+    var i = 0;
+    var v = n;
+    while (v >= 1024 && i < u.length - 1) { v /= 1024; i++; }
+    return (i === 0 ? String(Math.round(v)) : v.toFixed(1)) + ' ' + u[i];
+  }
+
+  function renderDisk(d) {
+    if (!d || d.totalBytes == null) {
+      $('#diskUse').textContent = '不可用';
+      $('#diskSub').textContent = d && d.path ? '缓存目录：' + d.path : '';
+      $('#diskBar').style.width = '0';
+      return;
+    }
+    var pct = Math.max(0, Math.min(100, Number(d.percent) || 0));
+    $('#diskUse').textContent = pct.toFixed(1) + '% 已用 · 剩 ' + fmtSize(d.freeBytes);
+    var bar = $('#diskBar');
+    bar.style.width = pct + '%';
+    bar.className = pct >= 90 ? 'bad' : (pct >= 75 ? 'warn' : '');
+    var sub = '已用 ' + fmtSize(d.usedBytes) + ' / 总 ' + fmtSize(d.totalBytes);
+    if (d.cacheBytes != null) sub += ' · 切片缓存 ' + fmtSize(d.cacheBytes);
+    if (d.maxCacheMB) sub += '（上限 ' + d.maxCacheMB + ' MB）';
+    $('#diskSub').textContent = sub;
+  }
+
+  function renderChannels(chs) {
+    if (!chs.length) {
+      $('#channelRows').innerHTML = '<tr><td colspan="7" class="muted">没有频道</td></tr>';
+      return;
+    }
+    // 正在播放/拉流的频道排到最前，方便一眼看到当前状态；其余保持原顺序
+    var sorted = chs.slice().sort(function (a, b) {
+      function rank(c) { return c.playing ? 2 : (c.active ? 1 : 0); }
+      return rank(b) - rank(a);
+    });
+    $('#channelRows').innerHTML = sorted.map(function (c) {
+      var local = !state.config || state.config.segmentsEnabled !== false;
+      var st = c.active ? '<span class="badge ok"><span class="dot on"></span>拉流中</span>' : '<span class="badge"><span class="dot off"></span>空闲</span>';
+      if (!c.active && c.playing) st = '<span class="badge ok"><span class="dot on"></span>播放中</span>';
+      if (c.vod) st = '<span class="badge warn">点播</span>';
+      if (c.demo) st = '<span class="badge bad">演示源 · 已跳过</span>';
+      var cachedN = c.cachedSegments != null ? c.cachedSegments : (c.cached || 0);
+      var playedN = c.playedTotal || 0;
+      var playedSecs = c.playedSeconds || 0;
+      var hasPlay = playedN > 0;
+      var remain = (c.remainingSeconds != null && hasPlay) ? (c.remainingSeconds + 's') : '—';
+      var remainStyle = '';
+      if (hasPlay && c.remainingSeconds != null) {
+        if (c.remainingSeconds <= 6) remainStyle = ' style="color:var(--err);font-weight:600"';
+        else if (c.remainingSeconds <= 18) remainStyle = ' style="color:var(--warn);font-weight:600"';
+      }
+      // 剩余未播 = 播放器前方（含末尾缓冲池）还能播多少秒；下面拆成“池内 / 已下发”
+      var detail = hasPlay
+        ? '<div class="muted" style="font-size:11px">' +
+          (c.holdSeconds ? '池内 ' + c.holdSeconds + 's · ' : '') +
+          '已下发 ' + (c.playableSeconds || 0) + 's</div>'
+        : '';
+      var cacheSub = '<div class="muted" style="font-size:11px">约 ' + fmtDur(c.bufferedSeconds) + '</div>';
+      var segTh = $('#chSegHead');
+      if (segTh) segTh.textContent = local ? '缓存切片' : '切片来源';
+      var cacheCell = local
+        ? cachedN + ' 片' + cacheSub
+        : '<span class="muted">直连</span><div class="muted" style="font-size:11px">清单 ' + cachedN + ' 片 · 不落盘</div>';
+      var playedSub = hasPlay ? '<div class="muted" style="font-size:11px">约 ' + fmtDur(playedSecs) + '</div>' : '';
+      var unplayedN = c.unplayedSegments || 0;
+      var unplayedSub = '<div class="muted" style="font-size:11px">约 ' + fmtDur(c.unplayedSeconds || 0) + '</div>';
+      return '<tr' + (c.playing || c.active ? ' class="current"' : '') + '>' +
+        '<td data-label="ID"><code>' + esc(c.id) + '</code></td>' +
+        '<td data-label="频道">' + esc(c.name) + '</td>' +
+        '<td data-label="状态">' + st + '</td>' +
+        '<td data-label="' + (local ? '缓存切片' : '切片来源') + '">' + cacheCell + '</td>' +
+        '<td data-label="已播切片">' + playedN + ' 片' + playedSub + '</td>' +
+        '<td data-label="未播切片">' + unplayedN + ' 片' + unplayedSub + '</td>' +
+        '<td data-label="剩余未播"' + remainStyle + '>' + remain + detail + '</td>' +
+        '</tr>';
+    }).join('');
+  }
+
+  function renderPlaying(chs) {
+    var wrap = $('#playingWrap');
+    if (!wrap) return;
+    var playing = chs.filter(function (c) { return c.playing; });
+    var active = chs.filter(function (c) { return c.active; });
+    if (!playing.length) {
+      wrap.innerHTML = '<div class="playing-empty">当前没有正在播放的频道' +
+        (active.length ? '（另有 ' + active.length + ' 个频道在后台拉流，等待播放器连接）' : '') + '</div>';
+      return;
+    }
+    wrap.innerHTML = playing.map(function (c) {
+      var cachedN = c.cachedSegments != null ? c.cachedSegments : (c.cached || 0);
+      var buf = c.bufferedSeconds ? fmtDur(c.bufferedSeconds) : '—';
+      var local = !state.config || state.config.segmentsEnabled !== false;
+      var remain = c.remainingSeconds != null ? (c.remainingSeconds + ' 秒') : '—';
+      var pool = c.holdSeconds ? ' · 池内 ' + c.holdSeconds + ' 秒' : '';
+      var progress = (c.playedTotal || 0) > 0 || (c.remainingSeconds || 0) > 0
+        ? '已播 ' + (c.playedTotal || 0) + ' 片 · 剩余 ' + remain + pool
+        : '尚未取到切片 · 播放进度由播放器本地管理';
+      var meta = local
+        ? ' · 缓存 ' + cachedN + ' 片（' + buf + '）'
+        : ' · 切片直连 · 当前清单 ' + cachedN + ' 片';
+      return '<div class="playing-item">' +
+        '<div class="pi-name"><span class="dot on"></span>' + esc(c.name) + '</div>' +
+        '<div class="pi-meta"><code>' + esc(c.id) + '</code>' + meta + '</div>' +
+        '<div class="pi-meta">' + progress + '</div>' +
+        '</div>';
+    }).join('');
+  }
+
+  function setPill(ok, msg) {
+    var p = $('#pill');
+    p.className = 'pill ' + (ok ? 'ok' : 'bad');
+    p.textContent = ok ? '● 服务正常' : '● ' + (msg || '服务异常');
+  }
+
+  // ---------- 日志 ----------
+  function logTime(ts) {
+    try { return new Date(ts).toLocaleTimeString('zh-CN', { hour12: false }); } catch (e) { return ''; }
+  }
+
+  function logClass(l) {
+    if (l.level === 'error' || /失败|错误|异常|超时|不可用|未处理/.test(l.text)) return 'err';
+    if (/代理出口切换/.test(l.text)) return 'warn';
+    if (/已更新|已启动|已加载|已恢复|成功|已保存|已关闭|已开启|切台/.test(l.text)) return 'ok';
+    return '';
+  }
+
+  function renderLogs() {
+    var view = $('#logView');
+    var q = ($('#logFilter').value || '').trim().toLowerCase();
+    var all = state.logs;
+    var lines = q ? all.filter(function (l) { return l.text.toLowerCase().indexOf(q) >= 0; }) : all;
+    var shown = lines.slice(-800);
+    var atBottom = view.scrollHeight - view.scrollTop - view.clientHeight < 80;
+    if (!shown.length) {
+      view.innerHTML = '<div class="logline sys">' + (q ? '没有匹配的日志' : '暂无日志') + '</div>';
+    } else {
+      view.innerHTML = shown.map(function (l) {
+        var cls = logClass(l);
+        return '<div class="logline ' + cls + '"><span class="lt">' + logTime(l.time) + '</span>' + esc(l.text) + '</div>';
+      }).join('');
+    }
+    $('#logCount').textContent = shown.length + ' / ' + all.length + ' 行' + (q ? '（已过滤）' : '');
+    if (atBottom) view.scrollTop = view.scrollHeight;
+  }
+
+  async function loadLogs(reset) {
+    if (reset) {
+      state.logs = [];
+      state.logLastId = 0;
+    }
+    var data = await api('/api/admin/logs?since=' + state.logLastId + '&limit=300');
+    var lines = data.lines || [];
+    if (lines.length) {
+      state.logs = state.logs.concat(lines);
+      if (state.logs.length > 1500) state.logs = state.logs.slice(-1500);
+    }
+    if (typeof data.lastId === 'number' && data.lastId > state.logLastId) state.logLastId = data.lastId;
+    renderLogs();
+  }
+
+  $('#logFilter').addEventListener('input', renderLogs);
+  $('#btnLogReload').addEventListener('click', function () {
+    this.disabled = true;
+    loadLogs(true).catch(function (e) { toast('加载日志失败：' + e.message, 'err'); })
+      .then(function () { $('#btnLogReload').disabled = false; });
+  });
+  $('#btnLogClear').addEventListener('click', function () {
+    state.logs = [];
+    renderLogs();
+    toast('已清空当前页面显示的日志（服务端仍保留）', 'ok');
+  });
+
+  // ---------- 快捷操作 ----------
+  async function doAction(action, okMsg) {
+    try {
+      var r = await api('/api/admin/action', { method: 'POST', body: { action: action } });
+      if (okMsg) toast(okMsg, 'ok');
+      return r;
+    } catch (e) {
+      toast('操作失败：' + e.message, 'err');
+      throw e;
+    }
+  }
+
+  $('#btnRefreshSource').addEventListener('click', async function () {
+    this.disabled = true;
+    try {
+      var r = await doAction('refreshSource', '源清单已刷新');
+      toast('当前 ' + r.channels + ' 个频道', 'ok');
+      await loadStatus();
+    } finally { this.disabled = false; }
+  });
+  $('#btnClearCache').addEventListener('click', async function () {
+    if (!confirm('确定清空切片缓存？正在播放的频道会短暂重新缓冲。')) return;
+    this.disabled = true;
+    try { await doAction('clearCache', '缓存已清空'); await loadStatus(); }
+    finally { this.disabled = false; }
+  });
+  $('#btnRestart').addEventListener('click', async function () {
+    if (!confirm('确定重启服务？会中断正在播放的频道几秒钟。')) return;
+    this.disabled = true;
+    try {
+      await doAction('restart');
+      state.dirty = false;
+      setPill(false, '服务重启中…');
+      toast('服务正在重启，等待恢复后自动刷新…', 'ok');
+      await waitForServer();
+      location.reload();
+    } catch (e) { this.disabled = false; }
+  });
+
+  // 重启后轮询，直到接口重新应答（401 也算服务已起来）
+  async function waitForServer(timeoutMs) {
+    var deadline = Date.now() + (timeoutMs || 90000);
+    await new Promise(function (r) { setTimeout(r, 1200); });
+    while (Date.now() < deadline) {
+      try {
+        var res = await fetch('/api/admin/config?t=' + Date.now(), { cache: 'no-store' });
+        if (res.ok || res.status === 401) return true;
+      } catch (e) {}
+      await new Promise(function (r) { setTimeout(r, 1500); });
+    }
+    toast('服务等待超时，请手动刷新页面', 'err');
+    return false;
+  }
+
+  $('#btnSave').addEventListener('click', saveConfig);
+
+  // ---------- 日间 / 夜间模式 ----------
+  function applyTheme(t) {
+    var theme = t === 'dark' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+    try { localStorage.setItem('m3u-theme', theme); } catch (e) {}
+    var btn = $('#btnTheme');
+    if (btn) btn.textContent = theme === 'dark' ? '☀️ 白天' : '🌙 夜间';
+  }
+  applyTheme(document.documentElement.getAttribute('data-theme'));
+  $('#btnTheme').addEventListener('click', function () {
+    var cur = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+    applyTheme(cur === 'dark' ? 'light' : 'dark');
+  });
+
+  // 概览页的“去配置里修改”：跳到配置页并高亮「缓冲池」
+  function gotoPoolConfig(e) {
+    if (e) e.preventDefault();
+    switchTab('config');
+    var input = document.querySelector('#configForm [data-key="bufferPoolSeconds"]');
+    if (!input) return;
+    // 切片本地缓冲关闭时缓冲池是置灰的：这时引导去开「切片本地缓冲」
+    if (input.disabled) input = document.querySelector('#configForm [data-key="segmentsEnabled"]') || input;
+    var field = input.closest('.field');
+    var group = input.closest('details');
+    if (group) group.open = true;
+    if (!field) return;
+    field.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    field.classList.add('flash');
+    setTimeout(function () { field.classList.remove('flash'); }, 1800);
+  }
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    if (t && t.classList && t.classList.contains('goto-pool')) gotoPoolConfig(e);
+  });
+
+  window.addEventListener('beforeunload', function (e) {
+    if (state.dirty) { e.preventDefault(); e.returnValue = ''; }
+  });
+
+  // ---------- 初始化 ----------
+  (async function init() {
+    try {
+      await loadConfig();
+      var ua = '/list.m3u';
+      $('#playlist').href = ua;
+      $('#playlist').textContent = location.origin + ua;
+      $('#playlistSub').textContent = '把这个地址加到电视/播放器里';
+      await loadStatus();
+    } catch (e) {
+      setPill(false, e.message);
+      toast('加载失败：' + e.message, 'err');
+    }
+    setInterval(function () { if (!$('#tab-overview').hidden) loadStatus(); }, 5000);
+    setInterval(function () { if (!$('#tab-channels').hidden) loadStatus(); }, 5000);
+    setInterval(function () {
+      if (!$('#tab-logs').hidden && $('#logAuto').checked) loadLogs(false).catch(function () {});
+    }, 2500);
+  })();
+})();
+</script>
+</body>
+</html>

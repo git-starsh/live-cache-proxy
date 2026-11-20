@@ -1,0 +1,447 @@
+#EXTM3U
+#EXTGRP:央视频道
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV1.png" http-user-agent="qqlive" group-title="央视频道",CCTV-1 综合
+https://live.ottiptv.cc/mcp/cctv1.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV1.png" http-user-agent="qqlive" group-title="央视频道",CCTV-1 综合
+https://live.ottiptv.cc/mcp/cctv1av3asfhd.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV1.png" http-user-agent="qqlive" group-title="央视频道",CCTV-1 综合
+https://live.ottiptv.cc/mg/608807420.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV2.png" http-user-agent="qqlive" group-title="央视频道",CCTV-2 财经
+https://live.ottiptv.cc/mcp/cctv2.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV2.png" http-user-agent="qqlive" group-title="央视频道",CCTV-2 财经
+https://live.ottiptv.cc/mcp/cctv2av3asfhd.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV2.png" http-user-agent="qqlive" group-title="央视频道",CCTV-2 财经
+https://live.ottiptv.cc/mg/631780532.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV3.png" http-user-agent="qqlive" group-title="央视频道",CCTV-3 综艺
+https://live.ottiptv.cc/mcp/cctv3.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV3.png" http-user-agent="qqlive" group-title="央视频道",CCTV-3 综艺
+https://live.ottiptv.cc/mcp/cctv3av3asfhd.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV3.png" http-user-agent="qqlive" group-title="央视频道",CCTV-3 综艺
+https://live.ottiptv.cc/mg/624878271.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV4.png" http-user-agent="qqlive" group-title="央视频道",CCTV-4 中文国际
+https://live.ottiptv.cc/mcp/cctv4.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV4.png" http-user-agent="qqlive" group-title="央视频道",CCTV-4 中文国际
+https://live.ottiptv.cc/mcp/cctv4av3asfhd.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV4.png" http-user-agent="qqlive" group-title="央视频道",CCTV-4 中文国际
+https://live.ottiptv.cc/mg/631780421.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV4欧洲.png" http-user-agent="qqlive" group-title="央视频道",CCTV-4 中文国际欧洲
+https://live.ottiptv.cc/mg/608807419.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV4美洲.png" http-user-agent="qqlive" group-title="央视频道",CCTV-4 中文国际美洲
+https://live.ottiptv.cc/mg/608807416.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV5.png" http-user-agent="qqlive" group-title="央视频道",CCTV-5 体育
+https://live.ottiptv.cc/mcp/cctv5.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV5.png" http-user-agent="qqlive" group-title="央视频道",CCTV-5 体育
+https://live.ottiptv.cc/mcp/cctv5av3asfhd.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV5.png" http-user-agent="qqlive" group-title="央视频道",CCTV-5 体育
+https://live.ottiptv.cc/mg/641886683.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV5+.png" http-user-agent="qqlive" group-title="央视频道",CCTV-5+ 体育赛事
+https://live.ottiptv.cc/mcp/cctv5p.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV5+.png" http-user-agent="qqlive" group-title="央视频道",CCTV-5+ 体育赛事
+https://live.ottiptv.cc/mcp/cctv5pav3asfhd.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV5+.png" http-user-agent="qqlive" group-title="央视频道",CCTV-5+ 体育赛事
+https://live.ottiptv.cc/mg/641886773.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV6.png" http-user-agent="qqlive" group-title="央视频道",CCTV-6 电影
+https://live.ottiptv.cc/mcp/cctv6.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV6.png" http-user-agent="qqlive" group-title="央视频道",CCTV-6 电影
+https://live.ottiptv.cc/mcp/cctv6av3asfhd.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV6.png" http-user-agent="qqlive" group-title="央视频道",CCTV-6 电影
+https://live.ottiptv.cc/mg/624878396.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV7.png" http-user-agent="qqlive" group-title="央视频道",CCTV-7 国防军事
+https://live.ottiptv.cc/mcp/cctv7.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV7.png" http-user-agent="qqlive" group-title="央视频道",CCTV-7 国防军事
+https://live.ottiptv.cc/mcp/cctv7av3asfhd.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV7.png" http-user-agent="qqlive" group-title="央视频道",CCTV-7 国防军事
+https://live.ottiptv.cc/mg/673168121.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV8.png" http-user-agent="qqlive" group-title="央视频道",CCTV-8 电视剧
+https://live.ottiptv.cc/mcp/cctv8.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV8.png" http-user-agent="qqlive" group-title="央视频道",CCTV-8 电视剧
+https://live.ottiptv.cc/mcp/cctv8av3asfhd.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV8.png" http-user-agent="qqlive" group-title="央视频道",CCTV-8 电视剧
+https://live.ottiptv.cc/mg/624878356.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV9.png" http-user-agent="qqlive" group-title="央视频道",CCTV-9 纪录
+https://live.ottiptv.cc/mcp/cctv9.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV9.png" http-user-agent="qqlive" group-title="央视频道",CCTV-9 纪录
+https://live.ottiptv.cc/mcp/cctv9av3asfhd.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV9.png" http-user-agent="qqlive" group-title="央视频道",CCTV-9 纪录
+https://live.ottiptv.cc/mg/673168140.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV10.png" http-user-agent="qqlive" group-title="央视频道",CCTV-10 科教
+https://live.ottiptv.cc/mcp/cctv10.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV10.png" http-user-agent="qqlive" group-title="央视频道",CCTV-10 科教
+https://live.ottiptv.cc/mcp/cctv10av3asfhd.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV10.png" http-user-agent="qqlive" group-title="央视频道",CCTV-10 科教
+https://live.ottiptv.cc/mg/624878405.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV11.png" http-user-agent="qqlive" group-title="央视频道",CCTV-11 戏曲
+https://live.ottiptv.cc/mcp/cctv11.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV11.png" http-user-agent="qqlive" group-title="央视频道",CCTV-11 戏曲
+https://live.ottiptv.cc/mcp/cctv11av3asfhd.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV11.png" http-user-agent="qqlive" group-title="央视频道",CCTV-11 戏曲
+https://live.ottiptv.cc/mg/667987558.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV12.png" http-user-agent="qqlive" group-title="央视频道",CCTV-12 社会与法
+https://live.ottiptv.cc/mcp/cctv12.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV12.png" http-user-agent="qqlive" group-title="央视频道",CCTV-12 社会与法
+https://live.ottiptv.cc/mcp/cctv12av3asfhd.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV12.png" http-user-agent="qqlive" group-title="央视频道",CCTV-12 社会与法
+https://live.ottiptv.cc/mg/673168185.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV13.png" http-user-agent="qqlive" group-title="央视频道",CCTV-13 新闻
+https://live.ottiptv.cc/mcp/cctv13.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV13.png" http-user-agent="qqlive" group-title="央视频道",CCTV-13 新闻
+https://live.ottiptv.cc/mcp/cctv13av3asfhd.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV13.png" http-user-agent="qqlive" group-title="央视频道",CCTV-13 新闻
+https://live.ottiptv.cc/mg/608807423.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV14.png" http-user-agent="qqlive" group-title="央视频道",CCTV-14 少儿
+https://live.ottiptv.cc/mcp/cctv14.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV14.png" http-user-agent="qqlive" group-title="央视频道",CCTV-14 少儿
+https://live.ottiptv.cc/mcp/cctv14av3asfhd.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV14.png" http-user-agent="qqlive" group-title="央视频道",CCTV-14 少儿
+https://live.ottiptv.cc/mg/624878440.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV15.png" http-user-agent="qqlive" group-title="央视频道",CCTV-15 音乐
+https://live.ottiptv.cc/mcp/cctv15.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV15.png" http-user-agent="qqlive" group-title="央视频道",CCTV-15 音乐
+https://live.ottiptv.cc/mcp/cctv15av3asfhd.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV15.png" http-user-agent="qqlive" group-title="央视频道",CCTV-15 音乐
+https://live.ottiptv.cc/mg/673168223.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV16.png" http-user-agent="qqlive" group-title="央视频道",CCTV-16 奥林匹克
+https://live.ottiptv.cc/mcp/cctv16.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV164.png" http-user-agent="qqlive" group-title="央视频道",CCTV-16 奥林匹克
+https://live.ottiptv.cc/mcp/cctv164k.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV16.png" http-user-agent="qqlive" group-title="央视频道",CCTV-16 奥林匹克
+https://live.ottiptv.cc/mcp/cctv16av3asfhd.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV164.png" http-user-agent="qqlive" group-title="央视频道",CCTV-16 奥林匹克
+https://live.ottiptv.cc/mcp/cctv164kav3ahdr.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV17.png" http-user-agent="qqlive" group-title="央视频道",CCTV-17 农业农村
+https://live.ottiptv.cc/mcp/cctv17.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV17.png" http-user-agent="qqlive" group-title="央视频道",CCTV-17 农业农村
+https://live.ottiptv.cc/mcp/cctv17av3asfhd.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV17.png" http-user-agent="qqlive" group-title="央视频道",CCTV-17 农业农村
+https://live.ottiptv.cc/mg/673168256.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV4K.png" http-user-agent="qqlive" group-title="央视频道",CCTV-4K 超高清
+https://live.ottiptv.cc/mcp/cctv4k.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV4K.png" http-user-agent="qqlive" group-title="央视频道",CCTV-4K 超高清
+https://live.ottiptv.cc/mcp/cctv4kav3ahdr.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV8K.png" http-user-agent="qqlive" group-title="央视频道",CCTV-8K 超高清
+https://live.ottiptv.cc/mcp/cctv8k.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CCTV8K.png" http-user-agent="qqlive" group-title="央视频道",CCTV-8K 超高清
+https://live.ottiptv.cc/mcp/cctv8kav3ahdr.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CHC影迷电影.png" http-user-agent="qqlive" group-title="央视频道",CHC影迷电影
+https://live.ottiptv.cc/mg/952383261.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CHC动作电影.png" http-user-agent="qqlive" group-title="央视频道",CHC动作电影
+https://live.ottiptv.cc/mg/644368714.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CHC家庭影院.png" http-user-agent="qqlive" group-title="央视频道",CHC家庭影院
+https://live.ottiptv.cc/mg/644368373.m3u8?userid=***&sign=***&auth_token=***
+#EXTGRP:卫视频道
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/东方卫视.png" http-user-agent="qqlive" group-title="卫视频道",东方卫视
+https://live.ottiptv.cc/mcp/dongfang.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/东方卫视.png" http-user-agent="qqlive" group-title="卫视频道",东方卫视
+https://live.ottiptv.cc/mg/651632648.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/江苏卫视.png" http-user-agent="qqlive" group-title="卫视频道",江苏卫视
+https://live.ottiptv.cc/mcp/jiangsu.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/江苏卫视.png" http-user-agent="qqlive" group-title="卫视频道",江苏卫视
+https://live.ottiptv.cc/mg/623899368.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/广东卫视.png" http-user-agent="qqlive" group-title="卫视频道",广东卫视
+https://live.ottiptv.cc/mcp/guangdong.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/广东卫视.png" http-user-agent="qqlive" group-title="卫视频道",广东卫视
+https://live.ottiptv.cc/mg/608831231.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/北京卫视.png" http-user-agent="qqlive" group-title="卫视频道",北京卫视
+https://live.ottiptv.cc/mcp/beijing.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/北京卫视.png" http-user-agent="qqlive" group-title="卫视频道",北京卫视
+https://live.ottiptv.cc/mg/630287636.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/辽宁卫视.png" http-user-agent="qqlive" group-title="卫视频道",辽宁卫视
+https://live.ottiptv.cc/mcp/liaoning.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/辽宁卫视.png" http-user-agent="qqlive" group-title="卫视频道",辽宁卫视
+https://live.ottiptv.cc/mg/630291707.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/河北卫视.png" http-user-agent="qqlive" group-title="卫视频道",河北卫视
+https://live.ottiptv.cc/mcp/hebei.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/河北卫视.png" http-user-agent="qqlive" group-title="卫视频道",河北卫视
+https://live.ottiptv.cc/mg/962042070.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/江西卫视.png" http-user-agent="qqlive" group-title="卫视频道",江西卫视
+https://live.ottiptv.cc/mcp/jiangxi.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/江西卫视.png" http-user-agent="qqlive" group-title="卫视频道",江西卫视
+https://live.ottiptv.cc/mg/783847495.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/河南卫视.png" http-user-agent="qqlive" group-title="卫视频道",河南卫视
+https://live.ottiptv.cc/mcp/henan.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/河南卫视.png" http-user-agent="qqlive" group-title="卫视频道",河南卫视
+https://live.ottiptv.cc/mg/790187291.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/陕西卫视.png" http-user-agent="qqlive" group-title="卫视频道",陕西卫视
+https://live.ottiptv.cc/mcp/shanxiws.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/陕西卫视.png" http-user-agent="qqlive" group-title="卫视频道",陕西卫视
+https://live.ottiptv.cc/mg/738910838.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/大湾区卫视.png" http-user-agent="qqlive" group-title="卫视频道",大湾区卫视
+https://live.ottiptv.cc/mg/608917627.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/湖北卫视.png" http-user-agent="qqlive" group-title="卫视频道",湖北卫视
+https://live.ottiptv.cc/mcp/hubei.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/湖北卫视.png" http-user-agent="qqlive" group-title="卫视频道",湖北卫视
+https://live.ottiptv.cc/mg/947472496.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/吉林卫视.png" http-user-agent="qqlive" group-title="卫视频道",吉林卫视
+https://live.ottiptv.cc/mcp/jiling.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/吉林卫视.png" http-user-agent="qqlive" group-title="卫视频道",吉林卫视
+https://live.ottiptv.cc/mg/947472500.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/青海卫视.png" http-user-agent="qqlive" group-title="卫视频道",青海卫视
+https://live.ottiptv.cc/mcp/qinghai.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/青海卫视.png" http-user-agent="qqlive" group-title="卫视频道",青海卫视
+https://live.ottiptv.cc/mg/947472506.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/东南卫视.png" http-user-agent="qqlive" group-title="卫视频道",东南卫视
+https://live.ottiptv.cc/mcp/dongnan.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/东南卫视.png" http-user-agent="qqlive" group-title="卫视频道",东南卫视
+https://live.ottiptv.cc/mg/849116810.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/海南卫视.png" http-user-agent="qqlive" group-title="卫视频道",海南卫视
+https://live.ottiptv.cc/mcp/hainan.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/海南卫视.png" http-user-agent="qqlive" group-title="卫视频道",海南卫视
+https://live.ottiptv.cc/mg/947472502.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/兵团卫视.png" http-user-agent="qqlive" group-title="卫视频道",兵团卫视
+https://live.ottiptv.cc/mcp/bintuan.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/兵团卫视.png" http-user-agent="qqlive" group-title="卫视频道",兵团卫视
+https://live.ottiptv.cc/mg/956923145.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/宁夏卫视.png" http-user-agent="qqlive" group-title="卫视频道",宁夏卫视
+https://live.ottiptv.cc/mcp/ningxia.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/宁夏卫视.png" http-user-agent="qqlive" group-title="卫视频道",宁夏卫视
+https://live.ottiptv.cc/mg/738910535.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/重庆卫视.png" http-user-agent="qqlive" group-title="卫视频道",重庆卫视
+https://live.ottiptv.cc/mcp/chongqing.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/重庆卫视.png" http-user-agent="qqlive" group-title="卫视频道",重庆卫视
+https://live.ottiptv.cc/mg/738910914.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/黑龙江卫视.png" http-user-agent="qqlive" group-title="卫视频道",黑龙江卫视
+https://live.ottiptv.cc/mcp/heilongjiang.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/黑龙江卫视.png" http-user-agent="qqlive" group-title="卫视频道",黑龙江卫视
+https://live.ottiptv.cc/mg/738906901.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/湖南卫视.png" http-user-agent="qqlive" group-title="卫视频道",湖南卫视
+https://live.ottiptv.cc/mcp/hunan.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/浙江卫视.png" http-user-agent="qqlive" group-title="卫视频道",浙江卫视
+https://live.ottiptv.cc/mcp/zhejiang.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/天津卫视.png" http-user-agent="qqlive" group-title="卫视频道",天津卫视
+https://live.ottiptv.cc/mcp/tianjing.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/山东卫视.png" http-user-agent="qqlive" group-title="卫视频道",山东卫视
+https://live.ottiptv.cc/mcp/shandong.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/安徽卫视.png" http-user-agent="qqlive" group-title="卫视频道",安徽卫视
+https://live.ottiptv.cc/mcp/anhui.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/贵州卫视.png" http-user-agent="qqlive" group-title="卫视频道",贵州卫视
+https://live.ottiptv.cc/mcp/guizhou.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/深圳卫视.png" http-user-agent="qqlive" group-title="卫视频道",深圳卫视
+https://live.ottiptv.cc/mcp/shenzheng.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/四川卫视.png" http-user-agent="qqlive" group-title="卫视频道",四川卫视
+https://live.ottiptv.cc/mcp/sichuan.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/广西卫视.png" http-user-agent="qqlive" group-title="卫视频道",广西卫视
+https://live.ottiptv.cc/mcp/guangxi.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/山西卫视.png" http-user-agent="qqlive" group-title="卫视频道",山西卫视
+https://live.ottiptv.cc/mcp/shanxi.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/内蒙古卫视.png" http-user-agent="qqlive" group-title="卫视频道",内蒙古卫视
+https://live.ottiptv.cc/mcp/neimenggu.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/西藏卫视.png" http-user-agent="qqlive" group-title="卫视频道",西藏卫视
+https://live.ottiptv.cc/mcp/xizang.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/新疆卫视.png" http-user-agent="qqlive" group-title="卫视频道",新疆卫视
+https://live.ottiptv.cc/mcp/xinjiang.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/甘肃卫视.png" http-user-agent="qqlive" group-title="卫视频道",甘肃卫视
+https://live.ottiptv.cc/mcp/gansu.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/云南卫视.png" http-user-agent="qqlive" group-title="卫视频道",云南卫视
+https://live.ottiptv.cc/mcp/yunnan.m3u8?userid=***&sign=***&auth_token=***
+#EXTGRP:地方频道
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/海峡卫视.png" http-user-agent="qqlive" group-title="地方频道",海峡卫视
+https://live.ottiptv.cc/mg/849119120.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/中国农林卫视.png" http-user-agent="qqlive" group-title="地方频道",中国农林卫视
+https://live.ottiptv.cc/mg/956904896.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/三沙卫视.png" http-user-agent="qqlive" group-title="地方频道",三沙卫视
+https://live.ottiptv.cc/mg/961023778.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/上视新闻综合.png" http-user-agent="qqlive" group-title="地方频道",上视新闻综合
+https://live.ottiptv.cc/mg/651632657.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/上视东方影视.png" http-user-agent="qqlive" group-title="地方频道",上视东方影视
+https://live.ottiptv.cc/mg/617290047.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/上海第一财经.png" http-user-agent="qqlive" group-title="地方频道",上海第一财经
+https://live.ottiptv.cc/mg/608780988.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/南京新闻综合频道.png" http-user-agent="qqlive" group-title="地方频道",南京新闻综合频道
+https://live.ottiptv.cc/mg/838109047.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/南京教科频道.png" http-user-agent="qqlive" group-title="地方频道",南京教科频道
+https://live.ottiptv.cc/mg/838153729.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/南京十八频道.png" http-user-agent="qqlive" group-title="地方频道",南京十八频道
+https://live.ottiptv.cc/mg/838151753.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/体育休闲频道.png" http-user-agent="qqlive" group-title="地方频道",体育休闲频道
+https://live.ottiptv.cc/mg/626064707.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/江苏城市频道.png" http-user-agent="qqlive" group-title="地方频道",江苏城市频道
+https://live.ottiptv.cc/mg/626064714.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/江苏国际.png" http-user-agent="qqlive" group-title="地方频道",江苏国际
+https://live.ottiptv.cc/mg/626064674.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/江苏教育.png" http-user-agent="qqlive" group-title="地方频道",江苏教育
+https://live.ottiptv.cc/mg/628008321.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/江苏影视频道.png" http-user-agent="qqlive" group-title="地方频道",江苏影视频道
+https://live.ottiptv.cc/mg/626064697.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/江苏综艺频道.png" http-user-agent="qqlive" group-title="地方频道",江苏综艺频道
+https://live.ottiptv.cc/mg/626065193.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/公共新闻频道.png" http-user-agent="qqlive" group-title="地方频道",公共新闻频道
+https://live.ottiptv.cc/mg/626064693.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/盐城新闻综合.png" http-user-agent="qqlive" group-title="地方频道",盐城新闻综合
+https://live.ottiptv.cc/mg/639731825.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/淮安新闻综合.png" http-user-agent="qqlive" group-title="地方频道",淮安新闻综合
+https://live.ottiptv.cc/mg/639731826.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/泰州新闻综合.png" http-user-agent="qqlive" group-title="地方频道",泰州新闻综合
+https://live.ottiptv.cc/mg/639731818.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/连云港新闻综合.png" http-user-agent="qqlive" group-title="地方频道",连云港新闻综合
+https://live.ottiptv.cc/mg/639731715.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/宿迁新闻综合.png" http-user-agent="qqlive" group-title="地方频道",宿迁新闻综合
+https://live.ottiptv.cc/mg/639731832.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/徐州新闻综合.png" http-user-agent="qqlive" group-title="地方频道",徐州新闻综合
+https://live.ottiptv.cc/mg/639731747.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/优漫卡通频道.png" http-user-agent="qqlive" group-title="地方频道",优漫卡通频道
+https://live.ottiptv.cc/mg/626064703.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/南通新闻综合.png" http-user-agent="qqlive" group-title="地方频道",南通新闻综合
+https://live.ottiptv.cc/mg/955227985.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/宜兴新闻综合.png" http-user-agent="qqlive" group-title="地方频道",宜兴新闻综合
+https://live.ottiptv.cc/mg/955227996.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/溧水新闻综合.png" http-user-agent="qqlive" group-title="地方频道",溧水新闻综合
+https://live.ottiptv.cc/mg/639737327.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/陕西银龄频道.png" http-user-agent="qqlive" group-title="地方频道",陕西银龄频道
+https://live.ottiptv.cc/mg/956909362.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/陕西都市青春频道.png" http-user-agent="qqlive" group-title="地方频道",陕西都市青春频道
+https://live.ottiptv.cc/mg/956909358.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/陕西体育休闲频道.png" http-user-agent="qqlive" group-title="地方频道",陕西体育休闲频道
+https://live.ottiptv.cc/mg/956909356.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/陕西秦腔频道.png" http-user-agent="qqlive" group-title="地方频道",陕西秦腔频道
+https://live.ottiptv.cc/mg/956909303.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/陕西新闻资讯频道.png" http-user-agent="qqlive" group-title="地方频道",陕西新闻资讯频道
+https://live.ottiptv.cc/mg/956909289.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/财富天下.png" http-user-agent="qqlive" group-title="地方频道",财富天下
+https://live.ottiptv.cc/mg/956923159.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/镇江新闻综合.png" http-user-agent="qqlive" group-title="地方频道",镇江新闻综合
+https://live.ottiptv.cc/mg/639731783.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/海南广播电视总台新闻频道.png" http-user-agent="qqlive" group-title="地方频道",海南广播电视总台新闻频道
+https://live.ottiptv.cc/mg/962067517.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/海南广播电视总台自贸频道.png" http-user-agent="qqlive" group-title="地方频道",海南广播电视总台自贸频道
+https://live.ottiptv.cc/mg/962045226.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/海南广播电视总台社会与法频道.png" http-user-agent="qqlive" group-title="地方频道",海南广播电视总台社会与法频道
+https://live.ottiptv.cc/mg/962045223.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/海南广播电视总台文旅频道.png" http-user-agent="qqlive" group-title="地方频道",海南广播电视总台文旅频道
+https://live.ottiptv.cc/mg/962067526.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/海南广播电视总台少儿频道.png" http-user-agent="qqlive" group-title="地方频道",海南广播电视总台少儿频道
+https://live.ottiptv.cc/mg/962067523.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/广东珠江频道.png" http-user-agent="qqlive" group-title="地方频道",广东珠江频道
+https://live.ottiptv.cc/mg/639731952.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/吉林综艺文化频道.png" http-user-agent="qqlive" group-title="地方频道",吉林综艺文化频道
+https://live.ottiptv.cc/mg/968553163.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/吉林乡村频道.png" http-user-agent="qqlive" group-title="地方频道",吉林乡村频道
+https://live.ottiptv.cc/mg/968553176.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/吉林影视频道.png" http-user-agent="qqlive" group-title="地方频道",吉林影视频道
+https://live.ottiptv.cc/mg/968553184.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/吉林都市频道.png" http-user-agent="qqlive" group-title="地方频道",吉林都市频道
+https://live.ottiptv.cc/mg/968553190.m3u8?userid=***&sign=***&auth_token=***
+#EXTGRP:其他频道
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/重温经典.png" http-user-agent="qqlive" group-title="其他频道",重温经典
+https://live.ottiptv.cc/other/cwjd.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/五星体育.png" http-user-agent="qqlive" group-title="其他频道",五星体育
+https://live.ottiptv.cc/other/wxty.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CGTN外语纪录.png" http-user-agent="qqlive" group-title="其他频道",CGTN外语纪录
+https://live.ottiptv.cc/mg/609006487.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CGTN阿拉伯语.png" http-user-agent="qqlive" group-title="其他频道",CGTN阿拉伯语
+https://live.ottiptv.cc/mg/609154345.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CGTN西班牙语.png" http-user-agent="qqlive" group-title="其他频道",CGTN西班牙语
+https://live.ottiptv.cc/mg/609006450.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CGTN法语.png" http-user-agent="qqlive" group-title="其他频道",CGTN法语
+https://live.ottiptv.cc/mg/609006476.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CGTN俄语.png" http-user-agent="qqlive" group-title="其他频道",CGTN俄语
+https://live.ottiptv.cc/mg/609006446.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/老故事.png" http-user-agent="qqlive" group-title="其他频道",老故事
+https://live.ottiptv.cc/mg/884121956.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/发现之旅.png" http-user-agent="qqlive" group-title="其他频道",发现之旅
+https://live.ottiptv.cc/mg/624878970.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/中学生.png" http-user-agent="qqlive" group-title="其他频道",中学生
+https://live.ottiptv.cc/mg/708869532.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CGTN.png" http-user-agent="qqlive" group-title="其他频道",CGTN
+https://live.ottiptv.cc/mg/609017205.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/吉林生活频道.png" http-user-agent="qqlive" group-title="其他频道",吉林生活频道
+https://live.ottiptv.cc/mg/968553133.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/建党105周年巡礼.png" http-user-agent="qqlive" group-title="其他频道",建党105周年巡礼
+https://live.ottiptv.cc/mg/713600957.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/经典香港电影.png" http-user-agent="qqlive" group-title="其他频道",经典香港电影
+https://live.ottiptv.cc/mg/625703337.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/新片放映厅.png" http-user-agent="qqlive" group-title="其他频道",新片放映厅
+https://live.ottiptv.cc/mg/619495952.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/和美乡途轮播台.png" http-user-agent="qqlive" group-title="其他频道",和美乡途轮播台
+https://live.ottiptv.cc/mg/713591450.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/南方影视.png" http-user-agent="qqlive" group-title="其他频道",南方影视
+https://live.ottiptv.cc/mg/614961829.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/熊猫频道01高清.png" http-user-agent="qqlive" group-title="其他频道",熊猫频道01高清
+https://live.ottiptv.cc/mg/609158151.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/熊猫频道1.png" http-user-agent="qqlive" group-title="其他频道",熊猫频道1
+https://live.ottiptv.cc/mg/608933610.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/熊猫频道2.png" http-user-agent="qqlive" group-title="其他频道",熊猫频道2
+https://live.ottiptv.cc/mg/608933640.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/熊猫频道3.png" http-user-agent="qqlive" group-title="其他频道",熊猫频道3
+https://live.ottiptv.cc/mg/608934619.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/熊猫频道4.png" http-user-agent="qqlive" group-title="其他频道",熊猫频道4
+https://live.ottiptv.cc/mg/608934721.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/熊猫频道5.png" http-user-agent="qqlive" group-title="其他频道",熊猫频道5
+https://live.ottiptv.cc/mg/608935104.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/熊猫频道6.png" http-user-agent="qqlive" group-title="其他频道",熊猫频道6
+https://live.ottiptv.cc/mg/608935797.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/熊猫频道7.png" http-user-agent="qqlive" group-title="其他频道",熊猫频道7
+https://live.ottiptv.cc/mg/609169286.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/熊猫频道8.png" http-user-agent="qqlive" group-title="其他频道",熊猫频道8
+https://live.ottiptv.cc/mg/609169287.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/熊猫频道9.png" http-user-agent="qqlive" group-title="其他频道",熊猫频道9
+https://live.ottiptv.cc/mg/609169226.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/熊猫频道10.png" http-user-agent="qqlive" group-title="其他频道",熊猫频道10
+https://live.ottiptv.cc/mg/609169285.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/最强综艺趴.png" http-user-agent="qqlive" group-title="其他频道",最强综艺趴
+https://live.ottiptv.cc/mg/629942228.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/嘉佳卡通.png" http-user-agent="qqlive" group-title="其他频道",嘉佳卡通
+https://live.ottiptv.cc/mg/614952364.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/经典动画大集合.png" http-user-agent="qqlive" group-title="其他频道",经典动画大集合
+https://live.ottiptv.cc/mg/629942219.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/新动力量创一流.png" http-user-agent="qqlive" group-title="其他频道",新动力量创一流
+https://live.ottiptv.cc/mg/713589837.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/环球旅游.png" http-user-agent="qqlive" group-title="其他频道",环球旅游
+https://live.ottiptv.cc/mg/958475356.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/梨园频道.png" http-user-agent="qqlive" group-title="其他频道",梨园频道
+https://live.ottiptv.cc/mg/961930369.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/赛事最经典.png" http-user-agent="qqlive" group-title="其他频道",赛事最经典
+https://live.ottiptv.cc/mg/646596895.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/体坛名栏汇.png" http-user-agent="qqlive" group-title="其他频道",体坛名栏汇
+https://live.ottiptv.cc/mg/629943305.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/四海钓鱼.png" http-user-agent="qqlive" group-title="其他频道",四海钓鱼
+https://live.ottiptv.cc/mg/637444975.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/小时城市联赛轮播台.png" http-user-agent="qqlive" group-title="其他频道",小时城市联赛轮播台
+https://live.ottiptv.cc/mg/915512915.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/武术世界.png" http-user-agent="qqlive" group-title="其他频道",武术世界
+https://live.ottiptv.cc/mg/958475359.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/快乐垂钓.png" http-user-agent="qqlive" group-title="其他频道",快乐垂钓
+https://live.ottiptv.cc/mg/961930263.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CETV1.png" http-user-agent="qqlive" group-title="其他频道",CETV1
+https://live.ottiptv.cc/mg/923287154.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CETV2.png" http-user-agent="qqlive" group-title="其他频道",CETV2
+https://live.ottiptv.cc/mg/923287211.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CETV4.png" http-user-agent="qqlive" group-title="其他频道",CETV4
+https://live.ottiptv.cc/mg/923287339.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/山东教育.png" http-user-agent="qqlive" group-title="其他频道",山东教育
+https://live.ottiptv.cc/mg/609154353.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/书画频道.png" http-user-agent="qqlive" group-title="其他频道",书画频道
+https://live.ottiptv.cc/mg/968663920.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/第一剧场.png" http-user-agent="qqlive" group-title="其他频道",第一剧场
+https://live.ottiptv.cc/mcp/dyjc.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/风云剧场.png" http-user-agent="qqlive" group-title="其他频道",风云剧场
+https://live.ottiptv.cc/mcp/fyjc.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/怀旧剧场.png" http-user-agent="qqlive" group-title="其他频道",怀旧剧场
+https://live.ottiptv.cc/mcp/hjjc.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/cgtnar.png" http-user-agent="qqlive" group-title="其他频道",cgtnar
+https://live.ottiptv.cc/mcp/cgtnar.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/cgtndoc.png" http-user-agent="qqlive" group-title="其他频道",cgtndoc
+https://live.ottiptv.cc/mcp/cgtndoc.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/cgtn.png" http-user-agent="qqlive" group-title="其他频道",cgtn
+https://live.ottiptv.cc/mcp/cgtn.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/cgtnfr.png" http-user-agent="qqlive" group-title="其他频道",cgtnfr
+https://live.ottiptv.cc/mcp/cgtnfr.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/cgtnru.png" http-user-agent="qqlive" group-title="其他频道",cgtnru
+https://live.ottiptv.cc/mcp/cgtnru.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/cgtnsp.png" http-user-agent="qqlive" group-title="其他频道",cgtnsp
+https://live.ottiptv.cc/mcp/cgtnsp.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/中国教育电视台.png" http-user-agent="qqlive" group-title="其他频道",中国教育电视台
+https://live.ottiptv.cc/mcp/cetv1.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/国学频道.png" http-user-agent="qqlive" group-title="其他频道",国学频道
+https://live.ottiptv.cc/mcp/guoxue.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CGTNEN-AV3A.png" http-user-agent="qqlive" group-title="其他频道",CGTNEN-AV3A
+https://live.ottiptv.cc/mcp/cgtnav3asfhd.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/cgtndocumentary-AV3A.png" http-user-agent="qqlive" group-title="其他频道",cgtndocumentary-AV3A
+https://live.ottiptv.cc/mcp/cgtndocav3asfhd.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/cgtnru-AV3A.png" http-user-agent="qqlive" group-title="其他频道",cgtnru-AV3A
+https://live.ottiptv.cc/mcp/cgtnruav3asfhd.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/cgtnfrench-AV3A.png" http-user-agent="qqlive" group-title="其他频道",cgtnfrench-AV3A
+https://live.ottiptv.cc/mcp/cgtnfrav3asfhd.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/cgtnsp-AV3A.png" http-user-agent="qqlive" group-title="其他频道",cgtnsp-AV3A
+https://live.ottiptv.cc/mcp/cgtnspav3asfhd.m3u8?userid=***&sign=***&auth_token=***
+#EXTINF:-1 tvg-logo="https://gitee.com/IIII-9306/PAV/raw/master/logos/CGTNALBY-AV3A.png" http-user-agent="qqlive" group-title="其他频道",CGTNALBY-AV3A
+https://live.ottiptv.cc/mcp/cgtnarav3asfhd.m3u8?userid=***&sign=***&auth_token=***

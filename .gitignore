@@ -1,0 +1,16 @@
+# 运行时生成的数据（含节点/流量/订阅缓存，不要提交）
+proxy-settings.json
+proxy-runtime.json
+proxy-nodes.json
+proxy-traffic.json
+proxy-connections.json
+proxy-state.json
+proxy-subscriptions.json
+cache/
+
+# 日志与临时文件
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+node_modules/

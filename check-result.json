@@ -1,0 +1,112 @@
+[
+  {
+    "group": "央视频道",
+    "name": "CCTV-1 综合",
+    "url": "https://live.ottiptv.cc/mcp/cctv1.m3u8?userid=***&sign=***&auth_token=***",
+    "status": 503,
+    "ms": 11701,
+    "kind": "—",
+    "via": "curl",
+    "location": "https://live.ottiptv.cc/mcp/cctv1.m3u8?userid=***&sign=***",
+    "note": ""
+  },
+  {
+    "group": "央视频道",
+    "name": "CCTV-1 综合",
+    "url": "https://live.ottiptv.cc/mcp/cctv1av3asfhd.m3u8?userid=***&sign=***&auth_token=***",
+    "status": "ERR timeout",
+    "ms": 20067,
+    "kind": "—",
+    "via": "node",
+    "location": "",
+    "note": ""
+  },
+  {
+    "group": "央视频道",
+    "name": "CCTV-2 财经",
+    "url": "https://live.ottiptv.cc/mcp/cctv2.m3u8?userid=***&sign=***&auth_token=***",
+    "status": 503,
+    "ms": 11914,
+    "kind": "—",
+    "via": "node",
+    "location": "",
+    "note": ""
+  },
+  {
+    "group": "央视频道",
+    "name": "CCTV-2 财经",
+    "url": "https://live.ottiptv.cc/mcp/cctv2av3asfhd.m3u8?userid=***&sign=***&auth_token=***",
+    "status": 503,
+    "ms": 13501,
+    "kind": "—",
+    "via": "node",
+    "location": "",
+    "note": ""
+  },
+  {
+    "group": "央视频道",
+    "name": "CCTV-3 综艺",
+    "url": "https://live.ottiptv.cc/mcp/cctv3.m3u8?userid=***&sign=***&auth_token=***",
+    "status": 503,
+    "ms": 10081,
+    "kind": "—",
+    "via": "curl",
+    "location": "https://live.ottiptv.cc/mcp/cctv3.m3u8?userid=***&sign=***",
+    "note": ""
+  },
+  {
+    "group": "央视频道",
+    "name": "CCTV-3 综艺",
+    "url": "https://live.ottiptv.cc/mcp/cctv3av3asfhd.m3u8?userid=***&sign=***&auth_token=***",
+    "status": "ERR timeout",
+    "ms": 20077,
+    "kind": "—",
+    "via": "node",
+    "location": "",
+    "note": ""
+  },
+  {
+    "group": "央视频道",
+    "name": "CCTV-4 中文国际",
+    "url": "https://live.ottiptv.cc/mcp/cctv4.m3u8?userid=***&sign=***&auth_token=***",
+    "status": "ERR timeout",
+    "ms": 20082,
+    "kind": "—",
+    "via": "node",
+    "location": "",
+    "note": ""
+  },
+  {
+    "group": "央视频道",
+    "name": "CCTV-4 中文国际",
+    "url": "https://live.ottiptv.cc/mcp/cctv4av3asfhd.m3u8?userid=***&sign=***&auth_token=***",
+    "status": 503,
+    "ms": 13897,
+    "kind": "—",
+    "via": "curl",
+    "location": "https://live.ottiptv.cc/mcp/cctv4av3asfhd.m3u8?userid=***&sign=***",
+    "note": ""
+  },
+  {
+    "group": "央视频道",
+    "name": "CCTV-5 体育",
+    "url": "https://live.ottiptv.cc/mcp/cctv5.m3u8?userid=***&sign=***&auth_token=***",
+    "status": 503,
+    "ms": 3786,
+    "kind": "—",
+    "via": "curl",
+    "location": "https://live.ottiptv.cc/mcp/cctv5.m3u8?userid=***&sign=***",
+    "note": ""
+  },
+  {
+    "group": "央视频道",
+    "name": "CCTV-5 体育",
+    "url": "https://live.ottiptv.cc/mcp/cctv5av3asfhd.m3u8?userid=***&sign=***&auth_token=***",
+    "status": 503,
+    "ms": 5635,
+    "kind": "—",
+    "via": "curl",
+    "location": "https://live.ottiptv.cc/mcp/cctv5av3asfhd.m3u8?userid=***&sign=***",
+    "note": ""
+  }
+]
